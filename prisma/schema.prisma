@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  clerkId         String   @unique
+  email           String
+  name            String?
+  companyName     String?
+  companyAddress  String?
+  logoUrl         String?
+  createdAt       DateTime @default(now())
+  quotes       Quote[]
+  invoices     Invoice[]
+  customers    Customer[]
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  email     String?
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  quotes    Quote[]
+  invoices  Invoice[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, name])
+}
+
+model Quote {
+  id          String    @id @default(cuid())
+  userId      String
+  customerId  String
+  number      String?
+  reference   String?
+  description String    @default("")
+  items       Json      @default("[]")
+  amount      Float
+  discount    Float     @default(0)
+  vat         Float
+  total       Float
+  status      String    @default("draft")
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  invoices    Invoice[]
+}
+
+model Invoice {
+  id          String    @id @default(cuid())
+  userId      String
+  quoteId     String?
+  customerId  String
+  number      String?
+  reference   String?
+  description String    @default("")
+  items       Json      @default("[]")
+  amount      Float
+  discount    Float     @default(0)
+  vat         Float
+  total       Float
+  paid        Boolean   @default(false)
+  paidAt      DateTime?
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quote       Quote?    @relation(fields: [quoteId], references: [id])
+  customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
