@@ -19,7 +19,7 @@ export default function ExportPdfButton({ invoiceId }: { invoiceId: string }) {
   return (
     <button
       onClick={handleExport}
-      className="text-sm font-medium text-amber-600 hover:text-amber-700 hover:underline"
+      className="flex min-h-[44px] min-w-[44px] items-center justify-center text-sm font-medium text-amber-600 hover:text-amber-700 hover:underline"
     >
       Export PDF
     </button>

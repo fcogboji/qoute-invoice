@@ -118,7 +118,7 @@ export default function NewQuotePage() {
                   key={t.description}
                   type="button"
                   onClick={() => addQuickItem(t)}
-                  className="rounded-lg bg-stone-100 px-3 py-1.5 text-sm font-medium text-stone-700 hover:bg-amber-100 hover:text-amber-800"
+                  className="min-h-[44px] min-w-[44px] rounded-lg bg-stone-100 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-amber-100 hover:text-amber-800"
                 >
                   + {t.description}
                 </button>
@@ -126,20 +126,20 @@ export default function NewQuotePage() {
               <button
                 type="button"
                 onClick={addLine}
-                className="rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-amber-700"
+                className="min-h-[44px] min-w-[44px] rounded-lg bg-amber-600 px-3 py-2 text-sm font-medium text-white hover:bg-amber-700"
               >
                 + Custom
               </button>
             </div>
           </div>
-          <div className="mt-4 space-y-2">
+          <div className="mt-4 space-y-2 overflow-x-auto -mx-1 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-stone-300">
             {items.map((item, i) => (
-              <div key={i} className="grid grid-cols-12 items-center gap-2">
+              <div key={i} className="grid min-w-[480px] grid-cols-12 items-center gap-2">
                 <input
                   placeholder="Description"
                   value={item.description}
                   onChange={(e) => updateLine(i, "description", e.target.value)}
-                  className="col-span-5 rounded-lg border border-stone-300 px-3 py-2 text-sm"
+                  className="col-span-5 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-base sm:py-2 sm:text-sm"
                 />
                 <input
                   type="number"
@@ -147,7 +147,7 @@ export default function NewQuotePage() {
                   step={1}
                   value={item.quantity || ""}
                   onChange={(e) => updateLine(i, "quantity", Number(e.target.value) || 0)}
-                  className="col-span-2 rounded-lg border border-stone-300 px-3 py-2 text-sm text-right"
+                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base sm:py-2 sm:text-sm"
                 />
                 <input
                   type="number"
@@ -156,15 +156,15 @@ export default function NewQuotePage() {
                   placeholder="£"
                   value={item.rate || ""}
                   onChange={(e) => updateLine(i, "rate", Number(e.target.value) || 0)}
-                  className="col-span-2 rounded-lg border border-stone-300 px-3 py-2 text-sm text-right"
+                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base sm:py-2 sm:text-sm"
                 />
-                <span className="col-span-2 text-right text-sm font-medium">
+                <span className="col-span-2 flex min-h-[44px] items-center justify-end text-right text-sm font-medium">
                   £{((item.quantity || 0) * (item.rate || 0)).toFixed(2)}
                 </span>
                 <button
                   type="button"
                   onClick={() => removeLine(i)}
-                  className="col-span-1 text-stone-400 hover:text-red-600"
+                  className="col-span-1 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-stone-400 hover:bg-stone-100 hover:text-red-600"
                 >
                   ×
                 </button>
@@ -176,7 +176,7 @@ export default function NewQuotePage() {
               <span>Subtotal</span>
               <span>£{subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-sm">
+            <div className="flex items-center justify-between text-sm">
               <span>Discount (£)</span>
               <input
                 type="number"
@@ -184,7 +184,7 @@ export default function NewQuotePage() {
                 step={0.01}
                 value={discount || ""}
                 onChange={(e) => setDiscount(Number(e.target.value) || 0)}
-                className="w-20 rounded border border-stone-300 px-2 py-0.5 text-right text-sm"
+                className="min-h-[44px] w-24 rounded-lg border border-stone-300 px-3 py-2 text-right text-sm"
               />
             </div>
             <div className="flex justify-between text-sm">
@@ -198,17 +198,17 @@ export default function NewQuotePage() {
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-amber-600 px-8 py-3 font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
+            className="min-h-[44px] flex-1 rounded-xl bg-amber-600 px-8 py-3 font-semibold text-white hover:bg-amber-700 disabled:opacity-60 sm:flex-none"
           >
             {loading ? "Creating…" : "Create quote"}
           </button>
           <Link
             href="/dashboard/quotes"
-            className="rounded-xl border border-stone-300 px-6 py-3 font-medium text-stone-700 hover:bg-stone-50"
+            className="flex min-h-[44px] flex-1 items-center justify-center rounded-xl border border-stone-300 px-6 py-3 font-medium text-stone-700 hover:bg-stone-50 sm:flex-none"
           >
             Cancel
           </Link>

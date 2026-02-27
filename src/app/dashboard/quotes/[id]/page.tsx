@@ -50,7 +50,7 @@ export default async function QuoteDetailPage({
       {/* Document card */}
       <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-lg">
         {/* Header */}
-        <div className="border-b border-stone-200 bg-gradient-to-br from-amber-50 to-white px-8 py-6">
+        <div className="border-b border-stone-200 bg-gradient-to-br from-amber-50 to-white px-4 py-4 sm:px-8 sm:py-6">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex items-start gap-4">
               {user.logoUrl && (
@@ -99,7 +99,7 @@ export default async function QuoteDetailPage({
         </div>
 
         {/* Body */}
-        <div className="p-8">
+        <div className="p-4 sm:p-8">
           {/* Bill To */}
           <div className="mb-8 rounded-xl bg-stone-50 p-5">
             <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
@@ -120,14 +120,14 @@ export default async function QuoteDetailPage({
           </div>
 
           {/* Items table */}
-          <div className="overflow-hidden rounded-xl border border-stone-200">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-xl border border-stone-200 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-stone-300">
+            <table className="w-full min-w-[360px]">
               <thead>
                 <tr className="bg-green-700 text-left text-sm font-semibold text-white">
-                  <th className="px-5 py-4">Description</th>
-                  <th className="px-5 py-4 text-right">Qty</th>
-                  <th className="px-5 py-4 text-right">Unit Price</th>
-                  <th className="px-5 py-4 text-right">Amount</th>
+                  <th className="px-3 py-3 sm:px-5 sm:py-4">Description</th>
+                  <th className="px-3 py-3 text-right sm:px-5 sm:py-4">Qty</th>
+                  <th className="px-3 py-3 text-right sm:px-5 sm:py-4">Unit Price</th>
+                  <th className="px-3 py-3 text-right sm:px-5 sm:py-4">Amount</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,16 +138,16 @@ export default async function QuoteDetailPage({
                       i % 2 === 1 ? "bg-stone-50/50" : ""
                     }`}
                   >
-                    <td className="px-5 py-4 font-medium text-stone-900">
+                    <td className="px-3 py-3 font-medium text-stone-900 sm:px-5 sm:py-4">
                       {item.description || "—"}
                     </td>
-                    <td className="px-5 py-4 text-right text-stone-600">
+                    <td className="px-3 py-3 text-right text-stone-600 sm:px-5 sm:py-4">
                       {item.quantity}
                     </td>
-                    <td className="px-5 py-4 text-right text-stone-600">
+                    <td className="px-3 py-3 text-right text-stone-600 sm:px-5 sm:py-4">
                       £{Number(item.rate).toFixed(2)}
                     </td>
-                    <td className="px-5 py-4 text-right font-medium text-stone-900">
+                    <td className="px-3 py-3 text-right font-medium text-stone-900 sm:px-5 sm:py-4">
                       £{((item.quantity || 0) * (item.rate || 0)).toFixed(2)}
                     </td>
                   </tr>

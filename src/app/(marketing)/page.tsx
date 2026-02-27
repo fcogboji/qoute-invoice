@@ -7,7 +7,7 @@ export default function LandingPage() {
   return (
     <div className="text-stone-900">
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 py-20 md:py-32">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-32">
         <div className="text-center">
           <span className="inline-block rounded-full bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-800">
             For UK tradespeople
@@ -45,7 +45,7 @@ export default function LandingPage() {
         </div>
 
         {/* Trust row */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-stone-500">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 text-sm text-stone-500 sm:mt-16 sm:gap-8">
           <span className="flex items-center gap-2">
             <span className="font-semibold text-stone-700">£</span> UK pricing
           </span>
@@ -57,7 +57,7 @@ export default function LandingPage() {
         </div>
 
         {/* Mock document */}
-        <div className="mx-auto mt-20 max-w-md rounded-2xl border border-stone-200 bg-white p-6 shadow-xl">
+        <div className="mx-auto mt-12 max-w-md rounded-2xl border border-stone-200 bg-white p-4 shadow-xl sm:mt-20 sm:p-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-stone-400">
             What you get
           </p>
@@ -80,10 +80,10 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-4 flex gap-2">
-            <span className="flex-1 rounded-lg bg-amber-600 py-2.5 text-center text-sm font-medium text-white">
+            <span className="flex min-h-[44px] flex-1 items-center justify-center rounded-lg bg-amber-600 py-2.5 text-center text-sm font-medium text-white">
               Export PDF
             </span>
-            <span className="flex-1 rounded-lg bg-stone-100 py-2.5 text-center text-sm font-medium text-stone-700">
+            <span className="flex min-h-[44px] flex-1 items-center justify-center rounded-lg bg-stone-100 py-2.5 text-center text-sm font-medium text-stone-700">
               → Invoice
             </span>
           </div>
@@ -91,7 +91,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="border-t border-stone-200 bg-white py-20 px-6">
+      <section id="features" className="border-t border-stone-200 bg-white px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-2xl font-bold md:text-3xl">
             Made for how trades actually work
@@ -127,7 +127,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-stone-200 bg-amber-50/50 py-20 px-6">
+      <section className="border-t border-stone-200 bg-amber-50/50 px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold md:text-3xl">
             Built for UK trades. That&apos;s it.
@@ -138,7 +138,7 @@ export default function LandingPage() {
           <SignedOut>
             <Link
               href="/sign-up"
-              className="mt-8 inline-block rounded-xl bg-amber-600 px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-amber-700"
+              className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-xl bg-amber-600 px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-amber-700"
             >
               Get started free
             </Link>
@@ -146,7 +146,7 @@ export default function LandingPage() {
           <SignedIn>
             <Link
               href="/dashboard"
-              className="mt-8 inline-block rounded-xl bg-amber-600 px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-amber-700"
+              className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-xl bg-amber-600 px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-amber-700"
             >
               Go to Dashboard
             </Link>
@@ -155,16 +155,16 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-stone-200 py-10 px-6">
+      <footer className="border-t border-stone-200 px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
           <span className="text-sm text-stone-500">
             © {new Date().getFullYear()} TradesQuote — for UK tradespeople
           </span>
           <nav className="flex gap-6 text-sm">
-            <Link href="/#features" className="text-stone-600 hover:text-stone-900">
+            <Link href="/#features" className="min-h-[44px] py-2 text-stone-600 hover:text-stone-900 sm:min-h-0 sm:py-0">
               Features
             </Link>
-            <Link href="/pricing" className="text-stone-600 hover:text-stone-900">
+            <Link href="/pricing" className="min-h-[44px] py-2 text-stone-600 hover:text-stone-900 sm:min-h-0 sm:py-0">
               Pricing
             </Link>
           </nav>

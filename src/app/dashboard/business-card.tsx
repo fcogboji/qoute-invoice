@@ -60,7 +60,7 @@ export default function BusinessCard({
             placeholder="e.g. Smith Plumbing"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-900 placeholder:text-stone-400"
+            className="mt-1 min-h-[44px] w-full rounded-lg border border-stone-300 px-3 py-2.5 text-base text-stone-900 placeholder:text-stone-400 sm:py-2 sm:text-sm"
           />
         </div>
         <div>
@@ -76,7 +76,7 @@ export default function BusinessCard({
             placeholder="123 High Street, London, SW1A 1AA"
             value={companyAddress}
             onChange={(e) => setCompanyAddress(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-900 placeholder:text-stone-400"
+            className="mt-1 min-h-[80px] w-full rounded-lg border border-stone-300 px-3 py-2.5 text-base text-stone-900 placeholder:text-stone-400 sm:min-h-[60px] sm:py-2 sm:text-sm"
           />
         </div>
         <div>
@@ -92,7 +92,7 @@ export default function BusinessCard({
             placeholder="https://yoursite.com/logo.png"
             value={logoUrl}
             onChange={(e) => setLogoUrl(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-900 placeholder:text-stone-400"
+            className="mt-1 min-h-[44px] w-full rounded-lg border border-stone-300 px-3 py-2.5 text-base text-stone-900 placeholder:text-stone-400 sm:py-2 sm:text-sm"
           />
           <p className="mt-1 text-xs text-stone-500">
             Paste a direct link to your logo (PNG or JPG). Host it on your
@@ -116,7 +116,7 @@ export default function BusinessCard({
           <button
             type="submit"
             disabled={saving}
-            className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-700 disabled:opacity-50"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-700 disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save"}
           </button>

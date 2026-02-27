@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   return (
     <div>
       <div className="flex items-center gap-2">
-        <h1 className="text-3xl font-bold text-stone-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-stone-900 sm:text-3xl">Dashboard</h1>
         <span className="rounded bg-stone-200 px-2 py-0.5 text-xs font-medium text-stone-600">
           UK
         </span>
@@ -27,10 +27,10 @@ export default async function DashboardPage() {
       </div>
 
       {/* Primary actions */}
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
+      <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-6 sm:grid-cols-2">
         <Link
           href="/dashboard/quotes/new"
-          className="group flex flex-col rounded-2xl border-2 border-stone-200 bg-white p-8 shadow-sm transition-all hover:border-amber-300 hover:shadow-lg"
+          className="group flex min-h-[120px] flex-col rounded-2xl border-2 border-stone-200 bg-white p-5 shadow-sm transition-all hover:border-amber-300 hover:shadow-lg sm:p-8"
         >
           <span className="text-4xl font-bold text-amber-600">New Quote</span>
           <p className="mt-2 text-stone-600">
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
 
         <Link
           href="/dashboard/invoices/new"
-          className="group flex flex-col rounded-2xl border-2 border-stone-200 bg-white p-8 shadow-sm transition-all hover:border-amber-300 hover:shadow-lg"
+          className="group flex min-h-[120px] flex-col rounded-2xl border-2 border-stone-200 bg-white p-5 shadow-sm transition-all hover:border-amber-300 hover:shadow-lg sm:p-8"
         >
           <span className="text-4xl font-bold text-amber-600">New Invoice</span>
           <p className="mt-2 text-stone-600">
@@ -56,16 +56,16 @@ export default async function DashboardPage() {
       </div>
 
       {/* Quick links */}
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
         <Link
           href="/dashboard/quotes"
-          className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-stone-200 bg-white px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-50 sm:py-2"
         >
           View quotes
         </Link>
         <Link
           href="/dashboard/invoices"
-          className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-stone-200 bg-white px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-50 sm:py-2"
         >
           View invoices
         </Link>
