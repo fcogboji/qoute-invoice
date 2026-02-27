@@ -98,13 +98,13 @@ export default function NewInvoicePage() {
             placeholder="Customer name"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
-            className="mt-3 w-full rounded-lg border border-stone-300 px-4 py-2.5 text-lg focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            className="mt-3 w-full rounded-lg border border-stone-300 px-4 py-2.5 text-lg text-stone-900 placeholder:text-stone-600 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
           />
           <input
             placeholder="Phone (optional)"
             value={customerPhone}
             onChange={(e) => setCustomerPhone(e.target.value)}
-            className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-2 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-2 text-stone-900 placeholder:text-stone-600 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
           />
         </div>
 
@@ -139,7 +139,7 @@ export default function NewInvoicePage() {
                   placeholder="Description"
                   value={item.description}
                   onChange={(e) => updateLine(i, "description", e.target.value)}
-                  className="col-span-5 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-base sm:py-2 sm:text-sm"
+                  className="col-span-5 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-base text-stone-900 placeholder:text-stone-600 sm:py-2 sm:text-sm"
                 />
                 <input
                   type="number"
@@ -147,7 +147,7 @@ export default function NewInvoicePage() {
                   step={1}
                   value={item.quantity || ""}
                   onChange={(e) => updateLine(i, "quantity", Number(e.target.value) || 0)}
-                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base sm:py-2 sm:text-sm"
+                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base text-stone-900 placeholder:text-stone-600 sm:py-2 sm:text-sm"
                 />
                 <input
                   type="number"
@@ -156,9 +156,9 @@ export default function NewInvoicePage() {
                   placeholder="£"
                   value={item.rate || ""}
                   onChange={(e) => updateLine(i, "rate", Number(e.target.value) || 0)}
-                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base sm:py-2 sm:text-sm"
+                  className="col-span-2 min-h-[44px] rounded-lg border border-stone-300 px-3 py-2.5 text-right text-base text-stone-900 placeholder:text-stone-600 sm:py-2 sm:text-sm"
                 />
-                <span className="col-span-2 flex min-h-[44px] items-center justify-end text-right text-sm font-medium">
+                <span className="col-span-2 flex min-h-[44px] items-center justify-end text-right text-sm font-medium text-stone-900">
                   £{((item.quantity || 0) * (item.rate || 0)).toFixed(2)}
                 </span>
                 <button
@@ -171,7 +171,7 @@ export default function NewInvoicePage() {
               </div>
             ))}
           </div>
-          <div className="mt-4 space-y-1 border-t border-stone-200 pt-4">
+          <div className="mt-4 space-y-1 border-t border-stone-200 pt-4 text-stone-800">
             <div className="flex justify-between text-sm">
               <span>Subtotal</span>
               <span>£{subtotal.toFixed(2)}</span>
@@ -184,7 +184,7 @@ export default function NewInvoicePage() {
                 step={0.01}
                 value={discount || ""}
                 onChange={(e) => setDiscount(Number(e.target.value) || 0)}
-                className="min-h-[44px] w-24 rounded-lg border border-stone-300 px-3 py-2 text-right text-sm"
+                className="min-h-[44px] w-24 rounded-lg border border-stone-300 px-3 py-2 text-right text-sm text-stone-900 placeholder:text-stone-600"
               />
             </div>
             <div className="flex justify-between text-sm">
