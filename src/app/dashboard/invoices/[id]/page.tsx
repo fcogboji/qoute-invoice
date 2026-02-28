@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getOrCreateUser } from "@/lib/auth";
 import MarkPaidButton from "./mark-paid-button";
 import InvoiceExportButtons from "./export-buttons";
+import ShareToCustomer from "@/components/share-to-customer";
 
 type Item = { description: string; quantity: number; rate: number };
 
@@ -54,6 +55,7 @@ export default async function InvoiceDetailPage({
                     src={user.logoUrl}
                     alt="Logo"
                     className="h-full w-full object-contain"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               )}
@@ -92,7 +94,15 @@ export default async function InvoiceDetailPage({
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 sm:shrink-0">
+            <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
+              <ShareToCustomer
+                customerName={invoice.customer.name}
+                customerPhone={invoice.customer.phone}
+                customerEmail={invoice.customer.email}
+                documentType="invoice"
+                documentNumber={invoice.number}
+                companyName={user.companyName}
+              />
               <InvoiceExportButtons invoiceId={invoice.id} />
               {!invoice.paid && <MarkPaidButton invoiceId={invoice.id} />}
             </div>
@@ -109,7 +119,7 @@ export default async function InvoiceDetailPage({
             <p className="mt-1 text-lg font-semibold text-stone-900">
               {invoice.customer.name}
             </p>
-            {(invoice.customer.email || invoice.customer.phone) && (
+            {(invoice.customer.email || invoice.customer.phone || invoice.customer.address) && (
               <div className="mt-2 space-y-0.5 text-sm text-stone-600">
                 {invoice.customer.email && <p>{invoice.customer.email}</p>}
                 {invoice.customer.phone && <p>{invoice.customer.phone}</p>}

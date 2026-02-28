@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getOrCreateUser } from "@/lib/auth";
 import ConvertToInvoiceButton from "./convert-button";
 import QuoteExportButtons from "./export-buttons";
+import ShareToCustomer from "@/components/share-to-customer";
 
 type Item = { description: string; quantity: number; rate: number };
 
@@ -60,6 +61,7 @@ export default async function QuoteDetailPage({
                     src={user.logoUrl}
                     alt="Logo"
                     className="h-full w-full object-contain"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               )}
@@ -89,7 +91,15 @@ export default async function QuoteDetailPage({
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 sm:shrink-0">
+            <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
+              <ShareToCustomer
+                customerName={quote.customer.name}
+                customerPhone={quote.customer.phone}
+                customerEmail={quote.customer.email}
+                documentType="quote"
+                documentNumber={quote.number}
+                companyName={user.companyName}
+              />
               <QuoteExportButtons quoteId={quote.id} />
               {quote.invoices.length === 0 && (
                 <ConvertToInvoiceButton quoteId={quote.id} />
@@ -108,7 +118,7 @@ export default async function QuoteDetailPage({
             <p className="mt-1 text-lg font-semibold text-stone-900">
               {quote.customer.name}
             </p>
-            {(quote.customer.email || quote.customer.phone) && (
+            {(quote.customer.email || quote.customer.phone || quote.customer.address) && (
               <div className="mt-2 space-y-0.5 text-sm text-stone-600">
                 {quote.customer.email && <p>{quote.customer.email}</p>}
                 {quote.customer.phone && <p>{quote.customer.phone}</p>}

@@ -36,10 +36,12 @@ export async function POST(req: Request) {
       name: c.name.trim(),
       email: c.email || null,
       phone: c.phone || null,
+      address: c.address || null,
     },
     update: {
       email: c.email || undefined,
       phone: c.phone || undefined,
+      address: c.address !== undefined ? (c.address || null) : undefined,
     },
   });
 

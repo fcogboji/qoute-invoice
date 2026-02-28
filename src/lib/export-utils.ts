@@ -90,11 +90,24 @@ export function generatePDF(doc: ExportDoc): Buffer {
   pdf.text(doc.customer.name, 20, billToY + 7);
   pdf.setFontSize(9);
   pdf.setTextColor(100, 116, 139);
-  if (doc.customer.email) pdf.text(doc.customer.email, 20, billToY + 13);
-  if (doc.customer.phone) pdf.text(doc.customer.phone, 20, billToY + 19);
-  if (doc.customer.address) pdf.text(doc.customer.address, 20, billToY + 25);
+  let billToOffset = billToY + 7;
+  if (doc.customer.email) {
+    pdf.text(doc.customer.email, 20, billToOffset);
+    billToOffset += 6;
+  }
+  if (doc.customer.phone) {
+    pdf.text(doc.customer.phone, 20, billToOffset);
+    billToOffset += 6;
+  }
+  if (doc.customer.address) {
+    const addrLines = doc.customer.address.split("\n").filter(Boolean);
+    addrLines.forEach((line) => {
+      pdf.text(line, 20, billToOffset);
+      billToOffset += 5;
+    });
+  }
 
-  const tableStartY = billToY + 38;
+  const tableStartY = billToOffset + 12;
   const tableData = doc.items.map((item) => [
     item.description || "—",
     String(item.quantity),

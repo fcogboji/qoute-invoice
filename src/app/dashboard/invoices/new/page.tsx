@@ -17,6 +17,7 @@ export default function NewInvoicePage() {
   const router = useRouter();
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
+  const [customerAddress, setCustomerAddress] = useState("");
   const [items, setItems] = useState<LineItem[]>([
     { description: "Labour", quantity: 1, rate: 0 },
     { description: "Materials", quantity: 1, rate: 0 },
@@ -58,7 +59,7 @@ export default function NewInvoicePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customer: { name: customerName.trim(), phone: customerPhone || undefined },
+          customer: { name: customerName.trim(), phone: customerPhone || undefined, address: customerAddress.trim() || undefined },
           items,
           amount: subtotal,
           discount,
@@ -104,6 +105,12 @@ export default function NewInvoicePage() {
             placeholder="Phone (optional)"
             value={customerPhone}
             onChange={(e) => setCustomerPhone(e.target.value)}
+            className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-2 text-stone-900 placeholder:text-stone-600 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+          />
+          <input
+            placeholder="Address (optional)"
+            value={customerAddress}
+            onChange={(e) => setCustomerAddress(e.target.value)}
             className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-2 text-stone-900 placeholder:text-stone-600 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
           />
         </div>
