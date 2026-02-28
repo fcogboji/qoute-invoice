@@ -4,16 +4,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 
-const links = [
+const links: { href: string; label: string }[] = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/dashboard/customers", label: "Customers" },
   { href: "/dashboard/quotes", label: "Quotes" },
   { href: "/dashboard/invoices", label: "Invoices" },
   { href: "/dashboard/reports", label: "Reports" },
   { href: "/dashboard/settings", label: "Settings" },
-] as const;
+];
 
-export default function DashboardHeader() {
+export default function DashboardHeader({ showAdmin = false }: { showAdmin?: boolean }) {
+  const navLinks = showAdmin ? [...links, { href: "/admin", label: "Admin" }] : links;
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,7 +29,7 @@ export default function DashboardHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex">
-          {links.map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -64,7 +65,7 @@ export default function DashboardHeader() {
       {open && (
         <div className="border-t border-stone-200 bg-white px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1">
-            {links.map(({ href, label }) => (
+            {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}

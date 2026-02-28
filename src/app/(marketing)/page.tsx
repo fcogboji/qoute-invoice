@@ -24,13 +24,13 @@ export default function LandingPage() {
 
           <SignedOut>
             <Link
-              href="/sign-up"
+              href="/pricing"
               className="mt-10 inline-flex h-14 items-center rounded-xl bg-amber-600 px-10 text-lg font-semibold text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:shadow-xl"
             >
-              Start free — no card needed
+              Start 7-day free trial
             </Link>
             <p className="mt-4 text-sm text-stone-500">
-              Join UK tradespeople who save hours every week
+              Try free for 7 days. Cancel anytime.
             </p>
           </SignedOut>
 
@@ -137,10 +137,10 @@ export default function LandingPage() {
           </p>
           <SignedOut>
             <Link
-              href="/sign-up"
+              href="/pricing"
               className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-xl bg-amber-600 px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-amber-700"
             >
-              Get started free
+              Start 7-day free trial
             </Link>
           </SignedOut>
           <SignedIn>
@@ -153,23 +153,6 @@ export default function LandingPage() {
           </SignedIn>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-stone-200 px-4 py-8 sm:px-6 sm:py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
-          <span className="text-sm text-stone-500">
-            © {new Date().getFullYear()} TradesQuote — for UK tradespeople
-          </span>
-          <nav className="flex gap-6 text-sm">
-            <Link href="/#features" className="min-h-[44px] py-2 text-stone-600 hover:text-stone-900 sm:min-h-0 sm:py-0">
-              Features
-            </Link>
-            <Link href="/pricing" className="min-h-[44px] py-2 text-stone-600 hover:text-stone-900 sm:min-h-0 sm:py-0">
-              Pricing
-            </Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -8,14 +8,18 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(cuid())
-  clerkId         String   @unique
-  email           String
-  name            String?
-  companyName     String?
-  companyAddress  String?
-  logoUrl         String?
-  createdAt       DateTime @default(now())
+  id                          String    @id @default(cuid())
+  clerkId                     String    @unique
+  email                       String
+  name                        String?
+  companyName                 String?
+  companyAddress              String?
+  logoUrl                     String?
+  createdAt                   DateTime  @default(now())
+  stripeCustomerId            String?
+  stripeSubscriptionId        String?
+  subscriptionStatus          String?   // trialing | active | past_due | canceled | unpaid
+  subscriptionCurrentPeriodEnd DateTime?
   quotes       Quote[]
   invoices     Invoice[]
   customers    Customer[]
