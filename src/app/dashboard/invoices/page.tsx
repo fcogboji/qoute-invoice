@@ -1,14 +1,37 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { getOrCreateUser } from "@/lib/auth";
 import ExportPdfButton from "./export-pdf-button";
+import InvoicesSearch from "./invoices-search";
 
-export default async function InvoicesPage() {
+export default async function InvoicesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string; paid?: string }>;
+}) {
   const user = await getOrCreateUser();
   if (!user) return null;
 
+  const { search, paid } = await searchParams;
+  const searchTerm = search?.trim() ?? "";
+  const paidFilter = paid ?? "";
+
+  const where = {
+    userId: user.id,
+    ...(paidFilter === "yes" ? { paid: true } : paidFilter === "no" ? { paid: false } : {}),
+    ...(searchTerm
+      ? {
+          OR: [
+            { number: { contains: searchTerm, mode: "insensitive" as const } },
+            { customer: { name: { contains: searchTerm, mode: "insensitive" as const } } },
+          ],
+        }
+      : {}),
+  };
+
   const invoices = await prisma.invoice.findMany({
-    where: { userId: user.id },
+    where,
     include: { customer: true },
     orderBy: { createdAt: "desc" },
   });
@@ -24,6 +47,10 @@ export default async function InvoicesPage() {
           New Invoice
         </Link>
       </div>
+
+      <Suspense fallback={<div className="mb-6 h-[44px] animate-pulse rounded-lg bg-stone-200" />}>
+        <InvoicesSearch />
+      </Suspense>
 
       {invoices.length === 0 ? (
         <div className="mt-12 rounded-xl border-2 border-dashed border-stone-300 bg-stone-50 p-12 text-center">

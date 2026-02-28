@@ -6,8 +6,10 @@ import { UserButton } from "@clerk/nextjs";
 
 const links = [
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/dashboard/customers", label: "Customers" },
   { href: "/dashboard/quotes", label: "Quotes" },
   { href: "/dashboard/invoices", label: "Invoices" },
+  { href: "/dashboard/reports", label: "Reports" },
   { href: "/dashboard/settings", label: "Settings" },
 ] as const;
 

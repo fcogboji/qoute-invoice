@@ -1,14 +1,37 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { getOrCreateUser } from "@/lib/auth";
 import ExportPdfButton from "./export-pdf-button";
+import QuotesSearch from "./quotes-search";
 
-export default async function QuotesPage() {
+export default async function QuotesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string; status?: string }>;
+}) {
   const user = await getOrCreateUser();
   if (!user) return null;
 
+  const { search, status } = await searchParams;
+  const searchTerm = search?.trim() ?? "";
+  const statusFilter = status ?? "";
+
+  const where = {
+    userId: user.id,
+    ...(statusFilter ? { status: statusFilter } : {}),
+    ...(searchTerm
+      ? {
+          OR: [
+            { number: { contains: searchTerm, mode: "insensitive" as const } },
+            { customer: { name: { contains: searchTerm, mode: "insensitive" as const } } },
+          ],
+        }
+      : {}),
+  };
+
   const quotes = await prisma.quote.findMany({
-    where: { userId: user.id },
+    where,
     include: { customer: true },
     orderBy: { createdAt: "desc" },
   });
@@ -24,6 +47,10 @@ export default async function QuotesPage() {
           New Quote
         </Link>
       </div>
+
+      <Suspense fallback={<div className="mb-6 h-[44px] animate-pulse rounded-lg bg-stone-200" />}>
+        <QuotesSearch />
+      </Suspense>
 
       {quotes.length === 0 ? (
         <div className="mt-12 rounded-xl border-2 border-dashed border-stone-300 bg-stone-50 p-12 text-center">
