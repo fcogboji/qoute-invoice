@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "TradesQuote — Quote on Site. Invoice in Seconds. UK Trades.",
+  title: "tradeinvoice — Quote on Site. Invoice in Seconds. UK Trades.",
   description:
     "The quoting app for UK tradespeople. Electricians, plumbers, builders, fitters. No paperwork. 20% VAT sorted. Works on your phone.",
 };

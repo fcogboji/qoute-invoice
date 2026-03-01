@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — TradesQuote",
-  description: "TradesQuote privacy policy. How we collect, use and protect your data.",
+  title: "Privacy Policy — tradeinvoice",
+  description: "tradeinvoice privacy policy. How we collect, use and protect your data.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2>1. Introduction</h2>
             <p>
-              TradesQuote (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates the TradesQuote platform and website. We are committed to protecting your privacy and handling your data in an open and transparent way. This policy explains how we collect, use, store and protect your personal information when you use our services.
+              tradeinvoice (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates the tradeinvoice platform and website. We are committed to protecting your privacy and handling your data in an open and transparent way. This policy explains how we collect, use, store and protect your personal information when you use our services.
             </p>
           </section>
 

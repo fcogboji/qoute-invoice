@@ -22,7 +22,7 @@ export default async function AdminDashboardPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-stone-900 sm:text-3xl">Platform Overview</h1>
-      <p className="mt-2 text-stone-600">Monitor users and activity across TradesQuote.</p>
+      <p className="mt-2 text-stone-600">Monitor users and activity across tradeinvoice.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
           <p className="text-sm font-medium text-stone-500">Users</p>

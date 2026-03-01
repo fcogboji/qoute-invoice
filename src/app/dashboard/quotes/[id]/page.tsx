@@ -91,15 +91,7 @@ export default async function QuoteDetailPage({
                 )}
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
-              <ShareToCustomer
-                customerName={quote.customer.name}
-                customerPhone={quote.customer.phone}
-                customerEmail={quote.customer.email}
-                documentType="quote"
-                documentNumber={quote.number}
-                companyName={user.companyName}
-              />
+            <div className="flex flex-wrap gap-2 sm:shrink-0">
               <QuoteExportButtons quoteId={quote.id} />
               {quote.invoices.length === 0 && (
                 <ConvertToInvoiceButton quoteId={quote.id} />

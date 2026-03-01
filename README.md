@@ -1,4 +1,4 @@
-# TradesQuote — UK Trades Quote & Invoice SaaS
+# tradeinvoice — UK Trades Quote & Invoice SaaS
 
 Professional quoting and invoicing for UK tradespeople. Built with Next.js 15+, Clerk, Prisma, Neon, and Stripe.
 

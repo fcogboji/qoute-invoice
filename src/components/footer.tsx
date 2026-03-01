@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand & tagline */}
           <div>
             <Link href="/" className="inline-flex items-center gap-2">
-              <span className="text-lg font-bold text-stone-900">TradesQuote</span>
+              <span className="text-lg font-bold text-stone-900">tradeinvoice</span>
               <span className="rounded bg-stone-200 px-2 py-0.5 text-xs font-medium text-stone-600">
                 UK
               </span>
@@ -65,7 +65,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-stone-200 pt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-stone-500">
-            © {year} TradesQuote. All rights reserved.
+            © {year} tradeinvoice. All rights reserved.
           </p>
         </div>
       </div>

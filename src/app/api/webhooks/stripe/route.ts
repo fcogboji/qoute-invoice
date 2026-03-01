@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
+import {
+  sendSubscriptionConfirmation,
+  sendSubscriptionCanceled,
+  sendPaymentReceipt,
+  sendPaymentFailed,
+} from "@/lib/email";
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -78,6 +84,10 @@ export async function POST(req: Request) {
           typeof session.customer === "string" ? session.customer : session.customer.id,
           subscription
         );
+        const user = await prisma.user.findFirst({ where: { clerkId } });
+        if (user?.email) {
+          sendSubscriptionConfirmation(user.email, user.name).catch(() => {});
+        }
         break;
       }
       case "customer.subscription.updated": {
@@ -98,7 +108,31 @@ export async function POST(req: Request) {
         const user = await prisma.user.findFirst({
           where: { stripeSubscriptionId: subscription.id },
         });
-        if (user) await clearSubscription(user.clerkId);
+        if (user) {
+          if (user.email) sendSubscriptionCanceled(user.email, user.name).catch(() => {});
+          await clearSubscription(user.clerkId);
+        }
+        break;
+      }
+      case "invoice.payment_succeeded": {
+        const invoice = event.data.object as Stripe.Invoice;
+        const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
+        if (!customerId) break;
+        const user = await prisma.user.findFirst({ where: { stripeCustomerId: customerId } });
+        if (!user?.email) break;
+        const amount = invoice.amount_paid
+          ? `£${(invoice.amount_paid / 100).toFixed(2)}`
+          : "—";
+        const isRenewal = !!invoice.billing_reason && invoice.billing_reason !== "subscription_create";
+        sendPaymentReceipt(user.email, user.name, amount, isRenewal).catch(() => {});
+        break;
+      }
+      case "invoice.payment_failed": {
+        const invoice = event.data.object as Stripe.Invoice;
+        const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
+        if (!customerId) break;
+        const user = await prisma.user.findFirst({ where: { stripeCustomerId: customerId } });
+        if (user?.email) sendPaymentFailed(user.email, user.name).catch(() => {});
         break;
       }
       default:

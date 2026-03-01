@@ -4,7 +4,6 @@ function normalizePhoneForWhatsApp(phone: string | null | undefined): string | n
   if (!phone || !phone.trim()) return null;
   const digits = phone.replace(/\D/g, "");
   if (digits.length === 0) return null;
-  // UK: if starts with 0, replace with 44. If 10 digits, prepend 44.
   if (digits.startsWith("0")) {
     return "44" + digits.slice(1);
   }

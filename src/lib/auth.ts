@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { prisma } from "./prisma";
+import { sendWelcomeEmail } from "./email";
 
 export async function getOrCreateUser() {
   const { userId } = await auth();
@@ -13,7 +14,7 @@ export async function getOrCreateUser() {
   if (!user) {
     const clerkUser = await currentUser();
     const email =
-      clerkUser?.emailAddresses?.[0]?.emailAddress || `user-${userId}@tradesquote.app`;
+      clerkUser?.emailAddresses?.[0]?.emailAddress || `user-${userId}@tradeinvoice.co.uk`;
     const name =
       clerkUser?.firstName && clerkUser?.lastName
         ? `${clerkUser.firstName} ${clerkUser.lastName}`
@@ -26,6 +27,7 @@ export async function getOrCreateUser() {
         name,
       },
     });
+    sendWelcomeEmail(email, name).catch(() => {});
   }
 
   return user;

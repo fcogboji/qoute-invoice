@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — TradesQuote",
-  description: "TradesQuote terms and conditions of use.",
+  title: "Terms & Conditions — tradeinvoice",
+  description: "tradeinvoice terms and conditions of use.",
 };
 
 export default function TermsPage() {
@@ -24,14 +24,14 @@ export default function TermsPage() {
           <section>
             <h2>1. Agreement to terms</h2>
             <p>
-              By accessing or using TradesQuote (&quot;the Service&quot;), you agree to be bound by these Terms &amp; Conditions. If you do not agree, you must not use the Service. We may update these terms from time to time; continued use after changes constitutes acceptance.
+              By accessing or using tradeinvoice (&quot;the Service&quot;), you agree to be bound by these Terms &amp; Conditions. If you do not agree, you must not use the Service. We may update these terms from time to time; continued use after changes constitutes acceptance.
             </p>
           </section>
 
           <section>
             <h2>2. The service</h2>
             <p>
-              TradesQuote provides software for creating quotes and invoices, aimed at UK tradespeople. The Service is offered &quot;as is&quot;. We strive to maintain availability but do not guarantee uninterrupted access. Access to the dashboard and core features (quotes, invoices, customers) is restricted to paying subscribers only. Anyone may view our landing page and pricing information without subscribing.
+              tradeinvoice provides software for creating quotes and invoices, aimed at UK tradespeople. The Service is offered &quot;as is&quot;. We strive to maintain availability but do not guarantee uninterrupted access. Access to the dashboard and core features (quotes, invoices, customers) is restricted to paying subscribers only. Anyone may view our landing page and pricing information without subscribing.
             </p>
           </section>
 
@@ -64,7 +64,7 @@ export default function TermsPage() {
           <section>
             <h2>6. Subscription and payment</h2>
             <p>
-              Paid plans are billed in advance (monthly). Fees are non-refundable unless required by law or as stated in our refund policy. We may change pricing with reasonable notice. You may cancel your subscription at any time; access continues until the end of the current billing period. If you cancel during your trial, you will not be charged. Payment is collected automatically by Stripe on behalf of TradesQuote.
+              Paid plans are billed in advance (monthly). Fees are non-refundable unless required by law or as stated in our refund policy. We may change pricing with reasonable notice. You may cancel your subscription at any time; access continues until the end of the current billing period. If you cancel during your trial, you will not be charged. Payment is collected automatically by Stripe on behalf of tradeinvoice.
             </p>
           </section>
 

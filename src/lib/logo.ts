@@ -3,7 +3,7 @@ export async function fetchLogoAsBase64(
 ): Promise<{ base64: string; format: "PNG" | "JPEG" } | null> {
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": "TradesQuote-PDF-Export/1.0" },
+      headers: { "User-Agent": "tradeinvoice-PDF-Export/1.0" },
       signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) return null;

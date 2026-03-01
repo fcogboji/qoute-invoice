@@ -31,7 +31,7 @@ export default function MarketingHeader() {
     <header className="border-b border-stone-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-stone-900">TradesQuote</span>
+          <span className="text-xl font-bold text-stone-900">tradeinvoice</span>
           <span className="rounded bg-stone-200 px-2 py-0.5 text-xs font-medium text-stone-600">
             UK
           </span>

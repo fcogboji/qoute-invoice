@@ -30,7 +30,7 @@ export default async function AdminLayout({
           <Link href="/admin" className="flex items-center gap-2">
             <span className="text-lg font-bold text-white">Admin</span>
             <span className="rounded bg-amber-600 px-2 py-0.5 text-xs font-medium text-white">
-              TradesQuote
+              tradeinvoice
             </span>
           </Link>
           <nav className="flex items-center gap-4">
