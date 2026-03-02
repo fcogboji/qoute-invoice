@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { UserButton } from "@clerk/nextjs";
+import { Logo } from "./logo";
 
 const links: { href: string; label: string }[] = [
   { href: "/dashboard", label: "Dashboard" },
@@ -18,14 +19,9 @@ export default function DashboardHeader({ showAdmin = false }: { showAdmin?: boo
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b border-stone-200 bg-white">
+    <header className="border-b border-[#0F2544]/10 bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-stone-900">tradeinvoice</span>
-          <span className="rounded bg-stone-200 px-2 py-0.5 text-xs font-medium text-stone-600">
-            UK
-          </span>
-        </Link>
+        <Logo variant="compact" href="/" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex">
@@ -33,7 +29,7 @@ export default function DashboardHeader({ showAdmin = false }: { showAdmin?: boo
             <Link
               key={href}
               href={href}
-              className="min-h-[44px] py-2 text-stone-600 hover:text-stone-900 transition-colors"
+              className="min-h-[44px] py-2 text-[#0F2544]/70 hover:text-[#0F2544] transition-colors"
             >
               {label}
             </Link>
@@ -46,7 +42,7 @@ export default function DashboardHeader({ showAdmin = false }: { showAdmin?: boo
           type="button"
           aria-label="Toggle menu"
           aria-expanded={open}
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-stone-600 hover:bg-stone-100 md:hidden"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[#0F2544]/70 hover:bg-[#0F2544]/5 md:hidden"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -63,19 +59,19 @@ export default function DashboardHeader({ showAdmin = false }: { showAdmin?: boo
 
       {/* Mobile drawer */}
       {open && (
-        <div className="border-t border-stone-200 bg-white px-4 py-4 md:hidden">
+        <div className="border-t border-[#0F2544]/10 bg-white px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="min-h-[44px] py-3 text-stone-600 hover:text-stone-900 transition-colors"
+                className="min-h-[44px] py-3 text-[#0F2544]/70 hover:text-[#0F2544] transition-colors"
                 onClick={() => setOpen(false)}
               >
                 {label}
               </Link>
             ))}
-            <div className="flex min-h-[44px] items-center border-t border-stone-100 pt-3">
+            <div className="flex min-h-[44px] items-center border-t border-[#0F2544]/10 pt-3">
               <UserButton afterSignOutUrl="/" />
             </div>
           </nav>
