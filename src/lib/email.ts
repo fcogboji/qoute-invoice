@@ -99,10 +99,21 @@ export async function sendPaymentReceipt(
   to: string,
   name: string | null,
   amount: string,
-  isRenewal: boolean
+  isRenewal: boolean,
+  invoiceUrl?: string | null
 ): Promise<{ success: boolean }> {
   const firstName = name?.split(" ")[0] || "there";
   const subject = isRenewal ? "Your tradeinvoice subscription has renewed" : "Thanks for your payment — tradeinvoice";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+
+  const invoiceLinkHtml = invoiceUrl
+    ? `<p>You can view this invoice here: <a href="${invoiceUrl}">${invoiceUrl}</a></p>`
+    : `<p>You can view your invoices in <a href="${appUrl}/dashboard/settings">settings</a> or in your Stripe customer portal.</p>`;
+
+  const invoiceLinkText = invoiceUrl
+    ? `You can view this invoice here: ${invoiceUrl}`
+    : `You can view your invoices in your dashboard settings or in your Stripe customer portal.`;
+
   const result = await sendEmail({
     to,
     subject,
@@ -110,10 +121,10 @@ export async function sendPaymentReceipt(
       <p>Hi ${firstName},</p>
       <p>${isRenewal ? "Your tradeinvoice subscription has renewed successfully." : "We've received your payment."}</p>
       <p><strong>Amount paid: ${amount}</strong></p>
-      <p>You can view your invoices in <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk"}/dashboard/settings">settings</a> or in your Stripe customer portal.</p>
+      ${invoiceLinkHtml}
       <p>Best regards,<br/>The tradeinvoice Team</p>
     `,
-    text: `Hi ${firstName},\n\n${isRenewal ? "Your tradeinvoice subscription has renewed successfully." : "We've received your payment."}\n\nAmount paid: ${amount}\n\nBest regards,\nThe tradeinvoice Team`,
+    text: `Hi ${firstName},\n\n${isRenewal ? "Your tradeinvoice subscription has renewed successfully." : "We've received your payment."}\n\nAmount paid: ${amount}\n\n${invoiceLinkText}\n\nBest regards,\nThe tradeinvoice Team`,
   });
   return { success: result.success };
 }
@@ -140,16 +151,36 @@ export async function sendPaymentFailed(to: string, name: string | null): Promis
 export async function sendTrialEndingSoon(to: string, name: string | null, daysLeft: number): Promise<{ success: boolean }> {
   const firstName = name?.split(" ")[0] || "there";
   const dayText = daysLeft === 1 ? "1 day" : `${daysLeft} days`;
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
   const result = await sendEmail({
     to,
     subject: `Your tradeinvoice trial ends in ${dayText}`,
     html: `
       <p>Hi ${firstName},</p>
       <p>Your 7-day free trial ends in ${dayText}. Your card will be charged automatically when the trial ends.</p>
-      <p>To continue using tradeinvoice without interruption, no action is needed. To cancel before you're charged, visit your <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk"}/dashboard/settings">settings</a>.</p>
+      <p>To continue using tradeinvoice without interruption, no action is needed. To cancel before you're charged, visit your <a href="${appUrl}/dashboard/settings">settings</a>.</p>
       <p>Best regards,<br/>The tradeinvoice Team</p>
     `,
     text: `Hi ${firstName},\n\nYour 7-day free trial ends in ${dayText}. Your card will be charged automatically when the trial ends.\n\nTo cancel before you're charged, visit your dashboard settings.\n\nBest regards,\nThe tradeinvoice Team`,
+  });
+  return { success: result.success };
+}
+
+/** Setup reminder for users who registered but haven't subscribed (app owner → user) */
+export async function sendSetupReminder(to: string, name: string | null): Promise<{ success: boolean }> {
+  const firstName = name?.split(" ")[0] || "there";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+  const result = await sendEmail({
+    to,
+    subject: "Finish setting up your tradeinvoice account",
+    html: `
+      <p>Hi ${firstName},</p>
+      <p>You started setting up your tradeinvoice account but didn&apos;t finish choosing a plan.</p>
+      <p>tradeinvoice lets you create UK-ready quotes and invoices in minutes — 7-day free trial included.</p>
+      <p><a href="${appUrl}/pricing">Click here to pick a plan and finish setup</a>.</p>
+      <p>Best regards,<br/>The tradeinvoice Team</p>
+    `,
+    text: `Hi ${firstName},\n\nYou started setting up your tradeinvoice account but didn't finish choosing a plan.\n\ntradeinvoice lets you create UK-ready quotes and invoices in minutes — 7-day free trial included.\n\nFinish setup here: ${appUrl}/pricing\n\nBest regards,\nThe tradeinvoice Team`,
   });
   return { success: result.success };
 }

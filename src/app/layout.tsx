@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import CookieBanner from "@/components/cookie-banner";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <html lang="en">
         <body className="antialiased font-sans">
           {children}
+          <CookieBanner />
         </body>
       </html>
     </ClerkProvider>

@@ -124,7 +124,8 @@ export async function POST(req: Request) {
           ? `£${(invoice.amount_paid / 100).toFixed(2)}`
           : "—";
         const isRenewal = !!invoice.billing_reason && invoice.billing_reason !== "subscription_create";
-        sendPaymentReceipt(user.email, user.name, amount, isRenewal).catch(() => {});
+        const invoiceUrl = invoice.hosted_invoice_url ?? invoice.invoice_pdf ?? null;
+        sendPaymentReceipt(user.email, user.name, amount, isRenewal, invoiceUrl).catch(() => {});
         break;
       }
       case "invoice.payment_failed": {
