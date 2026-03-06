@@ -20,12 +20,22 @@ type ExportDoc = {
   paid?: boolean;
   logoBase64?: string | null;
   logoFormat?: "PNG" | "JPEG";
+  brandColor?: string | null; // hex e.g. #2563EB
 };
+
+function hexToRgb(hex: string): [number, number, number] {
+  const m = hex.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+  if (!m) return [15, 37, 68]; // default navy
+  return [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)];
+}
 
 export function generatePDF(doc: ExportDoc): Buffer {
   const pdf = new jsPDF();
   const typeLabel = doc.type === "quote" ? "QUOTE" : "INVOICE";
-  const accentColor = doc.type === "invoice" ? [16, 185, 129] : [217, 119, 6]; // emerald-600 / amber-600
+  const defaultColor = doc.type === "invoice" ? [16, 185, 129] : [217, 119, 6];
+  const accentColor = (doc.brandColor && /^#[0-9A-Fa-f]{6}$/.test(doc.brandColor))
+    ? hexToRgb(doc.brandColor)
+    : defaultColor;
 
   let contentStartY = 28;
 
@@ -42,13 +52,18 @@ export function generatePDF(doc: ExportDoc): Buffer {
     }
   }
 
+  // Header accent line
+  pdf.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
+  pdf.setLineWidth(0.5);
+  pdf.line(20, 15, 190, 15);
+
   // Company block
   pdf.setFontSize(10);
   let y = contentStartY;
   if (doc.companyName) {
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(11);
-    pdf.setTextColor(41, 37, 36);
+    pdf.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
     pdf.text(doc.companyName.toUpperCase(), 20, y);
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(9);
@@ -68,7 +83,7 @@ export function generatePDF(doc: ExportDoc): Buffer {
   // Document type – prominent
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(20);
-  pdf.setTextColor(41, 37, 36);
+  pdf.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
   pdf.text(typeLabel, 20, docInfoY + 10);
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(10);
@@ -121,7 +136,7 @@ export function generatePDF(doc: ExportDoc): Buffer {
     body: tableData,
     theme: "plain",
     headStyles: {
-      fillColor: [41, 37, 36],
+      fillColor: [accentColor[0], accentColor[1], accentColor[2]],
       textColor: 255,
       fontStyle: "bold",
       fontSize: 10,
@@ -157,7 +172,7 @@ export function generatePDF(doc: ExportDoc): Buffer {
   // Total – highlighted
   pdf.setFillColor(250, 250, 249);
   pdf.rect(120, summaryY - 6, 80, 14, "F");
-  pdf.setDrawColor(214, 211, 209);
+  pdf.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
   pdf.rect(120, summaryY - 6, 80, 14, "S");
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(12);

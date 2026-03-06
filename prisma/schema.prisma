@@ -15,6 +15,7 @@ model User {
   companyName                 String?
   companyAddress              String?
   logoUrl                     String?
+  brandColor                  String?   // hex e.g. #2563EB
   createdAt                   DateTime  @default(now())
   stripeCustomerId            String?
   stripeSubscriptionId        String?

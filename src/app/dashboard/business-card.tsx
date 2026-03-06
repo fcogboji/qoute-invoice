@@ -1,21 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+const ACCEPTED_IMAGE_TYPES = "image/png,image/jpeg,image/jpg,image/webp";
+const MAX_LOGO_SIZE_BYTES = 500 * 1024; // 500KB
 
 export default function BusinessCard({
   companyName: initialCompanyName,
   companyAddress: initialCompanyAddress,
   logoUrl: initialLogoUrl,
+  brandColor: initialBrandColor,
 }: {
   companyName: string | null;
   companyAddress: string | null;
   logoUrl: string | null;
+  brandColor?: string | null;
 }) {
   const [companyName, setCompanyName] = useState(initialCompanyName ?? "");
   const [companyAddress, setCompanyAddress] = useState(initialCompanyAddress ?? "");
   const [logoUrl, setLogoUrl] = useState(initialLogoUrl ?? "");
+  const [brandColor, setBrandColor] = useState(initialBrandColor ?? "#0F2544");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [logoError, setLogoError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setLogoError(null);
+    if (!file) return;
+    if (!file.type.match(/^image\/(png|jpeg|jpg|webp)$/)) {
+      setLogoError("Please use PNG, JPG or WebP images only.");
+      return;
+    }
+    if (file.size > MAX_LOGO_SIZE_BYTES) {
+      setLogoError("Logo must be under 500KB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      if (result.startsWith("data:image/")) setLogoUrl(result);
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
+  const removeLogo = () => {
+    setLogoUrl("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +62,7 @@ export default function BusinessCard({
           companyName: companyName.trim() || null,
           companyAddress: companyAddress.trim() || null,
           logoUrl: logoUrl.trim() || null,
+          brandColor: brandColor || null,
         }),
       });
       if (res.ok) setSaved(true);
@@ -39,12 +73,9 @@ export default function BusinessCard({
 
   return (
     <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
-      <h2 className="text-lg font-semibold text-stone-900">
-        Your business
-      </h2>
+      <h2 className="text-lg font-semibold text-stone-900">Your business</h2>
       <p className="mt-1 text-sm text-stone-500">
-        Company name, address and logo on your quotes & invoices. Optional —
-        add when ready.
+        Company name, address, logo and brand colour appear on your quotes and invoices.
       </p>
       <form onSubmit={handleSubmit} className="mt-4 space-y-4">
         <div>
@@ -80,43 +111,92 @@ export default function BusinessCard({
           />
         </div>
         <div>
-          <label
-            htmlFor="logoUrl"
-            className="block text-sm font-medium text-stone-700"
-          >
-            Logo image URL
+          <label className="block text-sm font-medium text-stone-700">
+            Logo
           </label>
-          <input
-            id="logoUrl"
-            type="url"
-            placeholder="https://yoursite.com/logo.png"
-            value={logoUrl}
-            onChange={(e) => setLogoUrl(e.target.value)}
-            className="mt-1 min-h-[44px] w-full rounded-lg border border-stone-300 px-3 py-2.5 text-base text-stone-900 placeholder:text-stone-600 sm:py-2 sm:text-sm"
-          />
-          <p className="mt-1 text-xs text-stone-500">
-            Paste a direct link to your logo (PNG or JPG). Host it on your
-            website or use a free host like Imgur.
+          <p className="mt-0.5 text-xs text-stone-500 mb-2">
+            PNG, JPG or WebP. Max 500KB.
           </p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={ACCEPTED_IMAGE_TYPES}
+            onChange={handleLogoChange}
+            className="sr-only"
+          />
+          {!logoUrl ? (
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="flex min-h-[80px] w-full items-center justify-center rounded-lg border-2 border-dashed border-stone-300 bg-stone-50/50 text-sm font-medium text-stone-600 hover:border-[#0F2544]/40 hover:bg-stone-50 hover:text-[#0F2544] transition-colors"
+            >
+              Choose logo image
+            </button>
+          ) : null}
+          {logoError && (
+            <p className="mt-1 text-sm text-red-600">{logoError}</p>
+          )}
         </div>
         {logoUrl && (
-          <div className="rounded-lg border border-stone-200 bg-stone-50 p-3">
-            <p className="mb-2 text-xs text-stone-500">Preview</p>
+          <div className="flex items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 p-3">
             <img
               src={logoUrl}
               alt="Logo preview"
-              className="h-12 object-contain"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
+              className="h-12 w-auto max-w-[120px] object-contain"
+              onError={() => setLogoUrl("")}
             />
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="text-sm font-medium text-[#0F2544] hover:text-[#1A3A6E]"
+              >
+                Change
+              </button>
+              <span className="text-stone-300">|</span>
+              <button
+                type="button"
+                onClick={removeLogo}
+                className="text-sm font-medium text-stone-600 hover:text-stone-900"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         )}
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-2">
+            Brand colour
+          </label>
+          <p className="text-xs text-stone-500 mb-2">
+            Used on headers, table headings and total on your quotes & invoices.
+          </p>
+          <div className="flex items-center gap-3">
+            <input
+              type="color"
+              value={brandColor}
+              onChange={(e) => setBrandColor(e.target.value)}
+              className="h-10 w-14 cursor-pointer rounded-lg border border-stone-300 bg-transparent p-1"
+            />
+            <input
+              type="text"
+              value={brandColor}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (v === "" || /^#[0-9A-Fa-f]{0,6}$/.test(v) || /^[0-9A-Fa-f]{0,6}$/.test(v)) {
+                  setBrandColor(v.startsWith("#") ? v : v ? `#${v}` : "#0F2544");
+                }
+              }}
+              placeholder="#2563EB"
+              className="min-h-[40px] w-28 rounded-lg border border-stone-300 px-3 py-2 text-sm font-mono text-stone-900"
+            />
+          </div>
+        </div>
         <div className="flex items-center gap-2">
           <button
             type="submit"
             disabled={saving}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-700 disabled:opacity-50"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg bg-[#0F2544] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A3A6E] disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save"}
           </button>

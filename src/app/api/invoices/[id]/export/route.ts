@@ -42,6 +42,7 @@ export async function GET(
     paid: invoice.paid,
     logoBase64: logoData?.base64 ?? null,
     logoFormat: logoData?.format,
+    brandColor: user.brandColor,
   };
 
   const safeName = invoice.customer.name.replace(/[^a-zA-Z0-9]/g, "_");

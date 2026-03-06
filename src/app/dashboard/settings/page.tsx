@@ -34,6 +34,7 @@ export default async function SettingsPage() {
             companyName={user.companyName}
             companyAddress={user.companyAddress}
             logoUrl={user.logoUrl}
+            brandColor={user.brandColor}
           />
         </div>
       </div>

@@ -89,6 +89,7 @@ export default async function DashboardPage() {
             companyName={user.companyName}
             companyAddress={user.companyAddress}
             logoUrl={user.logoUrl}
+            brandColor={user.brandColor}
           />
         </div>
       </div>
