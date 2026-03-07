@@ -14,10 +14,12 @@
   "dependencies": {
     "@clerk/nextjs": "^6.38.2",
     "@prisma/client": "^5.22.0",
+    "bwip-js": "^4.8.0",
     "jspdf": "^4.2.0",
     "jspdf-autotable": "^5.0.7",
     "next": "16.1.6",
     "prisma": "^5.22.0",
+    "qrcode": "^1.5.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "recharts": "^3.7.0",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv-cli": "^11.0.0",

@@ -48,7 +48,9 @@ export async function GET(
   const safeName = invoice.customer.name.replace(/[^a-zA-Z0-9]/g, "_");
   const dateStr = new Date().toISOString().slice(0, 10);
 
-  const pdfBuffer = generatePDF(doc);
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+  const docWithUrl = { ...doc, paymentUrl: `${baseUrl}/dashboard/invoices/${id}` };
+  const pdfBuffer = await generatePDF(docWithUrl);
   return new Response(new Uint8Array(pdfBuffer), {
     headers: {
       "Content-Type": "application/pdf",

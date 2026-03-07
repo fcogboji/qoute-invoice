@@ -180,10 +180,12 @@ export default async function InvoiceDetailPage({
                   <span>-£{(invoice.discount ?? 0).toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-sm text-stone-600">
-                <span>VAT (20%)</span>
-                <span>£{invoice.vat.toFixed(2)}</span>
-              </div>
+              {invoice.vat > 0 && (
+                <div className="flex justify-between text-sm text-stone-600">
+                  <span>VAT (20%)</span>
+                  <span>£{invoice.vat.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between border-t border-stone-200 pt-3 text-lg font-bold text-stone-900">
                 <span>Total</span>
                 <span

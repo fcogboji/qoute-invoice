@@ -171,10 +171,12 @@ export default async function QuoteDetailPage({
                   <span>-£{(quote.discount ?? 0).toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-sm text-stone-600">
-                <span>VAT (20%)</span>
-                <span>£{quote.vat.toFixed(2)}</span>
-              </div>
+              {quote.vat > 0 && (
+                <div className="flex justify-between text-sm text-stone-600">
+                  <span>VAT (20%)</span>
+                  <span>£{quote.vat.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between border-t border-stone-200 pt-3 text-lg font-bold text-stone-900">
                 <span>Total</span>
                 <span className="bg-green-700 text-white p-2 rounded-sm">£{quote.total.toFixed(2)}</span>

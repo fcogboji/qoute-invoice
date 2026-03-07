@@ -23,6 +23,7 @@ export default function NewInvoiceForm({ initialCustomer }: { initialCustomer?: 
     { description: "Materials", quantity: 1, rate: 0 },
   ]);
   const [discount, setDiscount] = useState(0);
+  const [includeVat, setIncludeVat] = useState(true);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function NewInvoiceForm({ initialCustomer }: { initialCustomer?: 
 
   const subtotal = items.reduce((s, i) => s + i.quantity * i.rate, 0);
   const afterDiscount = Math.max(0, subtotal - discount);
-  const vat = afterDiscount * 0.2;
+  const vat = includeVat ? afterDiscount * 0.2 : 0;
   const total = afterDiscount + vat;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -184,10 +185,18 @@ export default function NewInvoiceForm({ initialCustomer }: { initialCustomer?: 
               className="min-h-[44px] w-24 rounded-lg border border-stone-300 px-3 py-2 text-right text-sm text-stone-900 placeholder:text-stone-600"
             />
           </div>
-          <div className="flex justify-between text-sm">
-            <span>VAT (20%)</span>
+          <label className="flex cursor-pointer items-center justify-between text-sm">
+            <span className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={includeVat}
+                onChange={(e) => setIncludeVat(e.target.checked)}
+                className="h-4 w-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500"
+              />
+              Add VAT (20%)
+            </span>
             <span>£{vat.toFixed(2)}</span>
-          </div>
+          </label>
           <div className="flex justify-between font-bold text-stone-900">
             <span>Total</span>
             <span className="text-amber-600">£{total.toFixed(2)}</span>

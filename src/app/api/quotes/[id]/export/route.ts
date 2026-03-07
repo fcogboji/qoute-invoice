@@ -47,7 +47,7 @@ export async function GET(
   const safeName = quote.customer.name.replace(/[^a-zA-Z0-9]/g, "_");
   const dateStr = new Date().toISOString().slice(0, 10);
 
-  const pdfBuffer = generatePDF(doc);
+  const pdfBuffer = await generatePDF(doc);
   return new Response(new Uint8Array(pdfBuffer), {
     headers: {
       "Content-Type": "application/pdf",

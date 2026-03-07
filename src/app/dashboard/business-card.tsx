@@ -165,18 +165,44 @@ export default function BusinessCard({
           </div>
         )}
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
-            Brand colour
-          </label>
-          <p className="text-xs text-stone-500 mb-2">
-            Used on headers, table headings and total on your quotes & invoices.
+          <h3 className="text-base font-semibold text-stone-900">
+            Choose your colour
+          </h3>
+          <p className="mt-1 text-sm text-stone-500 mb-4">
+            Personalise your invoices and quotes with a splash of colour
           </p>
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-4 sm:grid-cols-4 gap-3 mb-3">
+            {[
+              "#0F2544",
+              "#0d9488",
+              "#a855f7",
+              "#06b6d4",
+              "#22c55e",
+              "#fb7185",
+              "#eab308",
+              "#ef4444",
+            ].map((hex) => (
+              <button
+                key={hex}
+                type="button"
+                onClick={() => setBrandColor(hex)}
+                className={`h-12 w-12 rounded-xl transition-all shadow-sm hover:scale-105 ${
+                  brandColor === hex
+                    ? "ring-2 ring-offset-2 ring-[#0F2544]"
+                    : "hover:ring-2 hover:ring-stone-300"
+                }`}
+                style={{ backgroundColor: hex }}
+                aria-label={`Choose ${hex}`}
+                title={hex}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
             <input
               type="color"
               value={brandColor}
               onChange={(e) => setBrandColor(e.target.value)}
-              className="h-10 w-14 cursor-pointer rounded-lg border border-stone-300 bg-transparent p-1"
+              className="h-9 w-11 cursor-pointer rounded-lg border border-stone-300 bg-transparent p-1"
             />
             <input
               type="text"
@@ -188,8 +214,9 @@ export default function BusinessCard({
                 }
               }}
               placeholder="#2563EB"
-              className="min-h-[40px] w-28 rounded-lg border border-stone-300 px-3 py-2 text-sm font-mono text-stone-900"
+              className="min-h-[36px] w-24 rounded-lg border border-stone-300 px-2 py-1.5 text-sm font-mono text-stone-900"
             />
+            <span className="text-xs text-stone-500">or enter hex</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
