@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import CookieBanner from "@/components/cookie-banner";
+import StructuredData from "@/components/structured-data";
+import OrganizationSchema from "@/components/organization-schema";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -10,9 +12,45 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "tradeinvoice — Quote on Site. Invoice in Seconds. UK Trades.",
+  metadataBase: new URL("https://tradeinvoice.co.uk"),
+  title: {
+    default: "TradeInvoice – Simple Invoicing for UK Tradespeople",
+    template: "%s | TradeInvoice",
+  },
   description:
-    "The quoting app for UK tradespeople. Electricians, plumbers, builders, fitters. No paperwork. 20% VAT sorted. Works on your phone.",
+    "TradeInvoice helps UK tradespeople create, manage and track quotes and invoices easily. Built for electricians, plumbers, builders and contractors.",
+  keywords: [
+    "invoice software",
+    "quote software",
+    "UK tradespeople invoicing",
+    "invoice generator",
+    "plumber invoice",
+    "electrician invoice",
+    "TradeInvoice",
+  ],
+  authors: [{ name: "TradeInvoice" }],
+  creator: "TradeInvoice",
+  openGraph: {
+    title: "TradeInvoice – Simple Invoicing for UK Tradespeople",
+    description:
+      "Create and manage professional quotes and invoices for your trade business. UK VAT sorted. Works on your phone.",
+    url: "https://tradeinvoice.co.uk",
+    siteName: "TradeInvoice",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TradeInvoice – Simple Invoicing for UK Tradespeople",
+    description: "Create and manage professional quotes and invoices for your trade business.",
+  },
 };
 
 export default function RootLayout({
@@ -24,6 +62,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className="antialiased font-sans">
+          <StructuredData />
+          <OrganizationSchema />
           {children}
           <CookieBanner />
         </body>

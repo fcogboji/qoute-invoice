@@ -1,0 +1,18 @@
+export const seoKeywords = [
+  "invoice generator",
+  "invoice generator for freelancers",
+  "invoice generator for contractors",
+  "invoice generator for small business",
+  "invoice template uk",
+  "invoice software for freelancers",
+  "invoice software for small business",
+  "invoice software for plumbers",
+  "invoice software for electricians",
+  "invoice software for builders",
+  "invoice software for contractors",
+  "online invoice generator uk",
+  "vat invoice generator",
+  "plumber invoice software",
+  "electrician invoice software",
+  "contractor invoice software",
+];

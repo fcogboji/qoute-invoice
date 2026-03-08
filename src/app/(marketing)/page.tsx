@@ -3,10 +3,14 @@
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Logo } from "@/components/logo";
+import FAQSchema from "@/components/faq-schema";
+import SoftwareSchema from "@/components/software-schema";
 
 export default function LandingPage() {
   return (
     <div className="text-[#0F2544]">
+      <FAQSchema />
+      <SoftwareSchema />
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 md:py-32">
         <div className="text-center">
@@ -15,15 +19,16 @@ export default function LandingPage() {
             For UK tradespeople
           </span>
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[#0F2544] md:text-5xl lg:text-6xl">
-            Quote on site.
-            <br />
-            <span
-              className="bg-gradient-to-r from-[#00C6A2] to-[#00A3FF] bg-clip-text text-transparent"
-            >
+            TradeInvoice
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#0F2544]/80 md:text-xl">
+            TradeInvoice is a simple invoicing platform that helps UK tradespeople
+            create and manage quotes and invoices online. Quote on site.{" "}
+            <span className="font-semibold text-[#0F2544]">
               Invoice in seconds.
             </span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-[#0F2544]/70 md:text-xl">
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#0F2544]/70 md:text-xl">
             Built for electricians, plumbers, builders and fitters. No paperwork.
             UK VAT sorted. Works on your phone.
           </p>
@@ -96,7 +101,26 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features */}
+          {/* Internal links */}
+          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link href="/features" className="text-[#0F2544]/70 hover:text-[#0F2544]">
+              Features
+            </Link>
+            <Link href="/pricing" className="text-[#0F2544]/70 hover:text-[#0F2544]">
+              Pricing
+            </Link>
+            <Link href="/tools" className="text-[#0F2544]/70 hover:text-[#0F2544]">
+              Free tools
+            </Link>
+            <Link href="/about" className="text-[#0F2544]/70 hover:text-[#0F2544]">
+              About
+            </Link>
+            <Link href="/contact" className="text-[#0F2544]/70 hover:text-[#0F2544]">
+              Contact
+            </Link>
+          </div>
+
+          {/* Features */}
       <section id="features" className="border-t border-[#0F2544]/10 bg-white px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-2xl font-bold text-[#0F2544] md:text-3xl">
@@ -128,6 +152,41 @@ export default function LandingPage() {
                 <p className="mt-2 text-[#0F2544]/70">{item.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular guides */}
+      <section className="border-t border-[#0F2544]/10 bg-white px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-center text-2xl font-bold text-[#0F2544] md:text-3xl">
+            Popular Invoice Guides
+          </h2>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/seo/invoice-generator"
+              className="rounded-xl border border-[#0F2544]/10 bg-[#0F2544]/[0.02] px-4 py-2.5 text-sm font-medium text-[#0F2544] transition-colors hover:border-[#0F2544]/20 hover:bg-[#0F2544]/5"
+            >
+              Invoice Generator
+            </Link>
+            <Link
+              href="/seo/invoice-template-uk"
+              className="rounded-xl border border-[#0F2544]/10 bg-[#0F2544]/[0.02] px-4 py-2.5 text-sm font-medium text-[#0F2544] transition-colors hover:border-[#0F2544]/20 hover:bg-[#0F2544]/5"
+            >
+              Invoice Template UK
+            </Link>
+            <Link
+              href="/seo/invoice-software-for-freelancers"
+              className="rounded-xl border border-[#0F2544]/10 bg-[#0F2544]/[0.02] px-4 py-2.5 text-sm font-medium text-[#0F2544] transition-colors hover:border-[#0F2544]/20 hover:bg-[#0F2544]/5"
+            >
+              Invoice Software for Freelancers
+            </Link>
+            <Link
+              href="/tools"
+              className="rounded-xl border border-[#0F2544]/10 bg-[#0F2544]/[0.02] px-4 py-2.5 text-sm font-medium text-[#0F2544] transition-colors hover:border-[#0F2544]/20 hover:bg-[#0F2544]/5"
+            >
+              Free Tools
+            </Link>
           </div>
         </div>
       </section>
