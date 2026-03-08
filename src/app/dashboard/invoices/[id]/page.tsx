@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { getOrCreateUser } from "@/lib/auth";
 import MarkPaidButton from "./mark-paid-button";
 import InvoiceExportButtons from "./export-buttons";
-import ShareToCustomer from "@/components/share-to-customer";
 
 type Item = { description: string; quantity: number; rate: number };
 
@@ -95,14 +94,6 @@ export default async function InvoiceDetailPage({
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
-              <ShareToCustomer
-                customerName={invoice.customer.name}
-                customerPhone={invoice.customer.phone}
-                customerEmail={invoice.customer.email}
-                documentType="invoice"
-                documentNumber={invoice.number}
-                companyName={user.companyName}
-              />
               <InvoiceExportButtons invoiceId={invoice.id} />
               {!invoice.paid && <MarkPaidButton invoiceId={invoice.id} />}
             </div>
