@@ -29,7 +29,7 @@ export default function LandingPage() {
             </span>
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-[#0F2544]/70 md:text-xl">
-            Built for electricians, plumbers, builders and fitters. No paperwork.
+            Built for electricians, plumbers, builders, fitters, freelancers and small business. No paperwork.
             UK VAT sorted. Works on your phone.
           </p>
 

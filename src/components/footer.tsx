@@ -69,6 +69,38 @@ export default function Footer() {
               <ul className="mt-3 space-y-2">
                 <li>
                   <Link
+                    href="/use-cases/electricians"
+                    className="text-sm text-stone-600 transition-colors hover:text-stone-900"
+                  >
+                    Electricians
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/use-cases/plumbers"
+                    className="text-sm text-stone-600 transition-colors hover:text-stone-900"
+                  >
+                    Plumbers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/use-cases/carpenters"
+                    className="text-sm text-stone-600 transition-colors hover:text-stone-900"
+                  >
+                    Carpenters
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/use-cases/fitters"
+                    className="text-sm text-stone-600 transition-colors hover:text-stone-900"
+                  >
+                    Fitters
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/use-cases/freelancers"
                     className="text-sm text-stone-600 transition-colors hover:text-stone-900"
                   >
