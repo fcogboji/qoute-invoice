@@ -44,7 +44,7 @@ function FullLogo({ className = "" }: { className?: string }) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 480 160"
-      className={`h-14 w-auto sm:h-16 ${className}`}
+      className={`h-20 w-auto sm:h-24 ${className}`}
       aria-label="tradeinvoice — Quotes · Invoices · Business"
     >
       <defs>
@@ -99,7 +99,7 @@ function FullLogo({ className = "" }: { className?: string }) {
       <text x="130" y="95" fontFamily="Georgia, 'Times New Roman', serif" fontSize="52" fontWeight="700" letterSpacing="3" fill="#fff">
         TRADE
       </text>
-      <text x="130" y="130" fontFamily="Georgia, 'Times New Roman', serif" fontSize="28" fontWeight="400" letterSpacing="10" fill="url(#textGrad)">
+      <text x="130" y="132" fontFamily="Georgia, 'Times New Roman', serif" fontSize="38" fontWeight="500" letterSpacing="10" fill="url(#textGrad)">
         INVOICE
       </text>
       <rect x="130" y="100" width="310" height="2" rx="1" fill="url(#accentGrad)" opacity="0.5" />
@@ -114,10 +114,10 @@ function CompactLogo({ className = "" }: { className?: string }) {
   const teal = gradientColors.teal;
   const blue = gradientColors.blue;
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
       {/* Document + arrow icon */}
-      <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0F2544]">
-        <svg viewBox="0 0 72 106" className="h-6 w-6" fill="none">
+      <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0F2544]">
+        <svg viewBox="0 0 72 106" className="h-7 w-7" fill="none">
           <rect x="0" y="8" width="72" height="90" rx="8" fill={teal} opacity="0.25" />
           <rect x="0" y="8" width="72" height="90" rx="8" fill="none" stroke={teal} strokeWidth="2" />
           <path d="M50 8L72 30H50V8Z" fill={blue} opacity="0.5" />
@@ -132,9 +132,9 @@ function CompactLogo({ className = "" }: { className?: string }) {
       </span>
       {/* Wordmark */}
       <span className="flex flex-col leading-tight">
-        <span className="font-serif text-lg font-bold tracking-tight text-[#0F2544] sm:text-xl">trade</span>
+        <span className="font-serif text-xl font-bold tracking-tight text-[#0F2544] sm:text-2xl">trade</span>
         <span
-          className="text-sm font-normal tracking-widest sm:text-base"
+          className="text-base font-medium tracking-widest sm:text-lg"
           style={{
             background: `linear-gradient(90deg, ${gradientColors.teal}, ${gradientColors.blue})`,
             WebkitBackgroundClip: "text",

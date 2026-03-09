@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { auth } from "@clerk/nextjs/server";
 import { getOrCreateUser } from "@/lib/auth";
+import { getUserSubscription } from "@/lib/subscription";
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -24,7 +25,14 @@ export async function POST(req: Request) {
   const { userId } = await auth();
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  await getOrCreateUser();
+  const user = await getOrCreateUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const hasSubscription = await getUserSubscription(user.id);
+  if (hasSubscription) {
+    const base = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+    return NextResponse.json({ url: `${base}/dashboard` });
+  }
 
   const stripe = getStripe();
   if (!stripe) {

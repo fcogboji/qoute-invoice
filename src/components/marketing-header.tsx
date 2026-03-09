@@ -39,6 +39,13 @@ export default function MarketingHeader() {
       >
         Contact
       </Link>
+      <Link
+        href="/blog"
+        className="block min-h-[44px] py-3 text-[#0F2544]/70 hover:text-[#0F2544] transition-colors md:py-2"
+        onClick={() => setOpen(false)}
+      >
+        Blog
+      </Link>
     </>
   );
 

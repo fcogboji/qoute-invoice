@@ -118,6 +118,21 @@ export default function Footer() {
               </ul>
             </div>
 
+            {/* Resources */}
+            <div>
+              <h3 className="text-sm font-semibold text-stone-900">Resources</h3>
+              <ul className="mt-3 space-y-2">
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-sm text-stone-600 transition-colors hover:text-stone-900"
+                  >
+                    Blog
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* Company */}
             <div>
               <h3 className="text-sm font-semibold text-stone-900">Company</h3>

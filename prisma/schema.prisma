@@ -79,3 +79,17 @@ model Invoice {
   quote       Quote?    @relation(fields: [quoteId], references: [id])
   customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
 }
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  excerpt     String    @db.Text
+  content     String    @db.Text
+  videoUrl    String?
+  author      String?
+  published   Boolean   @default(true)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

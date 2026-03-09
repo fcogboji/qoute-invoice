@@ -1,8 +1,17 @@
+import { prisma } from "@/lib/prisma";
 import { seoKeywords } from "@/lib/seoKeywords";
 
 const BASE = "https://tradeinvoice.co.uk";
 
-export default function sitemap() {
+export default async function sitemap() {
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true },
+    select: { slug: true, updatedAt: true },
+  });
+  const blogPages = posts.map((p) => ({
+    url: `${BASE}/blog/${p.slug}`,
+    lastModified: p.updatedAt,
+  }));
   const seoPages = seoKeywords.map((keyword) => ({
     url: `${BASE}/seo/${keyword.replace(/\s+/g, "-").toLowerCase()}`,
     lastModified: new Date(),
@@ -30,6 +39,8 @@ export default function sitemap() {
     { url: `${BASE}/use-cases/freelancers`, lastModified: new Date() },
     { url: `${BASE}/use-cases/small-business`, lastModified: new Date() },
     { url: `${BASE}/guides/how-to-create-an-invoice`, lastModified: new Date() },
+    { url: `${BASE}/blog`, lastModified: new Date() },
+    ...blogPages,
     ...seoPages,
   ];
 }
