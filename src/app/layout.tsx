@@ -51,6 +51,9 @@ export const metadata: Metadata = {
     title: "TradeInvoice – Simple Invoicing for UK Tradespeople",
     description: "Create and manage professional quotes and invoices for your trade business.",
   },
+  verification: {
+    google: "10hbxiokmLm8SHIbF",
+  },
 };
 
 export default function RootLayout({
