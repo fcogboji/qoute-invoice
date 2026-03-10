@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { suspendUser, unsuspendUser, removeUser } from "../actions";
+import { SuspendButton } from "../suspend-button";
+import { RemoveButton } from "../remove-button";
 
 export default async function AdminUserDetailPage({
   params,
@@ -46,8 +49,19 @@ export default async function AdminUserDetailPage({
       </Link>
 
       <div className="mt-6 rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-stone-900">{user.email}</h1>
-        <p className="mt-1 text-stone-600">{user.name ?? "—"}</p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-stone-900">{user.email}</h1>
+            <p className="mt-1 text-stone-600">{user.name ?? "—"}</p>
+            {user.suspended && (
+              <span className="mt-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800">Suspended</span>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <SuspendButton userId={user.id} suspended={user.suspended} onSuspend={suspendUser} onUnsuspend={unsuspendUser} />
+            <RemoveButton userId={user.id} onRemove={removeUser} />
+          </div>
+        </div>
         {user.companyName && (
           <p className="mt-1 text-sm font-medium text-stone-700">{user.companyName}</p>
         )}

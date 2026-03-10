@@ -12,6 +12,7 @@ export default async function DashboardLayout({
 }) {
   const user = await getOrCreateUser();
   if (!user) redirect("/sign-in");
+  if (user.suspended) redirect("/suspended");
   const isAdmin = await isPlatformAdmin();
   const hasSubscription = await getUserSubscription(user.id);
   if (!isAdmin && !hasSubscription) redirect("/pricing");

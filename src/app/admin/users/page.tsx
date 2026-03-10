@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { suspendUser, unsuspendUser, removeUser } from "./actions";
+import { SuspendButton } from "./suspend-button";
+import { RemoveButton } from "./remove-button";
 
 export default async function AdminUsersPage({
   searchParams,
@@ -49,11 +52,12 @@ export default async function AdminUsersPage({
             <tr className="border-b border-stone-200 bg-stone-50">
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Email</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Name</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Status</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Company</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Customers</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Quotes</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Invoices</th>
-              <th className="px-4 py-3 text-right text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Joined</th>
+              <th className="px-4 py-3 text-right text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -63,11 +67,23 @@ export default async function AdminUsersPage({
                   <Link href={"/admin/users/" + u.id} className="font-medium text-stone-900 hover:text-amber-600">{u.email}</Link>
                 </td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u.name ?? "—"}</td>
+                <td className="px-4 py-3 sm:px-6 sm:py-4">
+                  {u.suspended ? (
+                    <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">Suspended</span>
+                  ) : (
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800">Active</span>
+                  )}
+                </td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u.companyName ?? "—"}</td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u._count.customers}</td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u._count.quotes}</td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u._count.invoices}</td>
-                <td className="px-4 py-3 text-right text-sm text-stone-500 sm:px-6 sm:py-4">{new Date(u.createdAt).toLocaleDateString("en-GB")}</td>
+                <td className="px-4 py-3 text-right sm:px-6 sm:py-4">
+                  <div className="flex justify-end gap-2">
+                    <SuspendButton userId={u.id} suspended={u.suspended} onSuspend={suspendUser} onUnsuspend={unsuspendUser} />
+                    <RemoveButton userId={u.id} onRemove={removeUser} />
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

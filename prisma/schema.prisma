@@ -16,6 +16,7 @@ model User {
   companyAddress              String?
   logoUrl                     String?
   brandColor                  String?   // hex e.g. #2563EB
+  suspended                   Boolean   @default(false)
   createdAt                   DateTime  @default(now())
   stripeCustomerId            String?
   stripeSubscriptionId        String?
