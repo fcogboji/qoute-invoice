@@ -20,14 +20,22 @@ export async function getOrCreateUser() {
         ? `${clerkUser.firstName} ${clerkUser.lastName}`
         : clerkUser?.firstName || null;
 
-    user = await prisma.user.create({
-      data: {
-        clerkId: userId,
-        email,
-        name,
-      },
-    });
-    sendWelcomeEmail(email, name).catch(() => {});
+    try {
+      user = await prisma.user.create({
+        data: {
+          clerkId: userId,
+          email,
+          name,
+        },
+      });
+      sendWelcomeEmail(email, name).catch(() => {});
+    } catch (e: unknown) {
+      if ((e as { code?: string })?.code === "P2002") {
+        user = await prisma.user.findUnique({ where: { clerkId: userId } });
+      } else {
+        throw e;
+      }
+    }
   }
 
   return user;
