@@ -49,7 +49,8 @@ export async function removeUser(userId: string) {
   if (!user) throw new Error("User not found");
   const clerkId = user.clerkId;
   try {
-    await clerkClient.users.banUser(clerkId);
+    const client = await clerkClient();
+    await client.users.banUser(clerkId);
   } catch {
     // If Clerk ban fails (e.g. user already banned), continue with DB delete
   }
