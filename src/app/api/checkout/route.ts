@@ -71,8 +71,8 @@ export async function POST(req: Request) {
     subscription_data: {
       trial_period_days: 7,
     },
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk"}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk"}/pricing`,
     client_reference_id: userId,
   });
 
