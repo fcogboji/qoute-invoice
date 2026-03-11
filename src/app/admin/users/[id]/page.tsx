@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { suspendUser, unsuspendUser, removeUser } from "../actions";
+import { hasActiveSubscription } from "@/lib/subscription";
+import { suspendUser, unsuspendUser, removeUser, grantSubscription, removeSubscription } from "../actions";
 import { SuspendButton } from "../suspend-button";
 import { RemoveButton } from "../remove-button";
+import { SubscriptionForm } from "../subscription-form";
 
 export default async function AdminUserDetailPage({
   params,
@@ -21,7 +23,7 @@ export default async function AdminUserDetailPage({
 
   if (!user) notFound();
 
-  const [recentQuotes, recentInvoices, revenue] = await Promise.all([
+  const [recentQuotes, recentInvoices, revenue, subscriptionLogs] = await Promise.all([
     prisma.quote.findMany({
       where: { userId: id },
       include: { customer: true },
@@ -37,6 +39,11 @@ export default async function AdminUserDetailPage({
     prisma.invoice.aggregate({
       where: { userId: id },
       _sum: { total: true },
+    }),
+    prisma.subscriptionAuditLog.findMany({
+      where: { targetUserId: id },
+      orderBy: { createdAt: "desc" },
+      take: 10,
     }),
   ]);
 
@@ -74,6 +81,53 @@ export default async function AdminUserDetailPage({
           <span>{user._count.quotes} quotes</span>
           <span>{user._count.invoices} invoices</span>
           <span className="font-medium text-emerald-700">£{totalRevenue.toFixed(2)} total revenue</span>
+        </div>
+
+        <div className="mt-6 border-t border-stone-200 pt-6">
+          <h3 className="text-sm font-semibold text-stone-900">Subscription</h3>
+          {hasActiveSubscription(user.subscriptionStatus) ? (
+            <p className="mt-2 text-sm text-stone-600">
+              <span className={user.subscriptionStatus === "active" ? "text-emerald-600" : "text-amber-600"}>
+                {user.subscriptionStatus}
+              </span>
+              {user.subscriptionAdminGranted && (
+                <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">Admin-granted</span>
+              )}
+              {user.subscriptionCurrentPeriodEnd && (
+                <> · Ends {new Date(user.subscriptionCurrentPeriodEnd).toLocaleDateString("en-GB")}</>
+              )}
+            </p>
+          ) : (
+            <p className="mt-2 text-sm text-stone-500">No active subscription</p>
+          )}
+          <div className="mt-3">
+            <SubscriptionForm
+              userId={user.id}
+              hasSubscription={hasActiveSubscription(user.subscriptionStatus)}
+              onGrant={grantSubscription}
+              onRemove={removeSubscription}
+            />
+          </div>
+          {subscriptionLogs.length > 0 && (
+            <div className="mt-4">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-stone-500">Audit log</h4>
+              <ul className="mt-2 space-y-1 text-sm text-stone-600">
+                {subscriptionLogs.map((log) => (
+                  <li key={log.id}>
+                    {log.action === "granted" ? (
+                      <span>
+                        <strong>{log.adminEmail}</strong> granted {log.plan} for {log.durationMonths} month{log.durationMonths === 1 ? "" : "s"} — {new Date(log.createdAt).toLocaleString("en-GB")}
+                      </span>
+                    ) : (
+                      <span>
+                        <strong>{log.adminEmail}</strong> removed subscription — {new Date(log.createdAt).toLocaleString("en-GB")}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 

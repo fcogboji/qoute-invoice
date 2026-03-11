@@ -166,6 +166,49 @@ export async function sendTrialEndingSoon(to: string, name: string | null, daysL
   return { success: result.success };
 }
 
+/** Admin granted subscription (app owner → user) */
+export async function sendAdminSubscriptionGranted(
+  to: string,
+  name: string | null,
+  periodEnd: Date
+): Promise<{ success: boolean }> {
+  const firstName = name?.split(" ")[0] || "there";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+  const formatted = periodEnd.toLocaleDateString("en-GB");
+  const result = await sendEmail({
+    to,
+    subject: "Your tradeinvoice subscription is active",
+    html: `
+      <p>Hi ${firstName},</p>
+      <p>Your tradeinvoice subscription has been activated. You now have full access to create quotes and invoices.</p>
+      <p>Your access continues until ${formatted}.</p>
+      <p><a href="${appUrl}/dashboard">Go to your dashboard</a></p>
+      <p>Best regards,<br/>The tradeinvoice Team</p>
+    `,
+    text: `Hi ${firstName},\n\nYour tradeinvoice subscription has been activated. You now have full access to create quotes and invoices.\n\nYour access continues until ${formatted}.\n\nBest regards,\nThe tradeinvoice Team`,
+  });
+  return result;
+}
+
+/** Admin removed subscription (app owner → user) */
+export async function sendAdminSubscriptionRemoved(to: string, name: string | null): Promise<{ success: boolean }> {
+  const firstName = name?.split(" ")[0] || "there";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tradeinvoice.co.uk";
+  const result = await sendEmail({
+    to,
+    subject: "Your tradeinvoice subscription has been removed",
+    html: `
+      <p>Hi ${firstName},</p>
+      <p>Your tradeinvoice subscription has been removed. Your access to the dashboard is no longer active.</p>
+      <p>You can resubscribe anytime from our <a href="${appUrl}/pricing">pricing page</a>.</p>
+      <p>If you have any questions, please contact us.</p>
+      <p>Best regards,<br/>The tradeinvoice Team</p>
+    `,
+    text: `Hi ${firstName},\n\nYour tradeinvoice subscription has been removed. Your access to the dashboard is no longer active.\n\nYou can resubscribe anytime from our pricing page.\n\nBest regards,\nThe tradeinvoice Team`,
+  });
+  return result;
+}
+
 /** Setup reminder for users who registered but haven't subscribed (app owner → user) */
 export async function sendSetupReminder(to: string, name: string | null): Promise<{ success: boolean }> {
   const firstName = name?.split(" ")[0] || "there";

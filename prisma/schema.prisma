@@ -22,6 +22,7 @@ model User {
   stripeSubscriptionId        String?
   subscriptionStatus          String?   // trialing | active | past_due | canceled | unpaid
   subscriptionCurrentPeriodEnd DateTime?
+  subscriptionAdminGranted    Boolean?  // true = comp/override by admin, false/null = Stripe
   quotes       Quote[]
   invoices     Invoice[]
   customers    Customer[]
@@ -79,6 +80,17 @@ model Invoice {
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   quote       Quote?    @relation(fields: [quoteId], references: [id])
   customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model SubscriptionAuditLog {
+  id              String   @id @default(cuid())
+  adminUserId     String
+  adminEmail      String
+  targetUserId    String
+  action          String   // granted | removed
+  plan            String?  // starter | pro (for granted)
+  durationMonths  Int?     // for granted
+  createdAt       DateTime @default(now())
 }
 
 model BlogPost {

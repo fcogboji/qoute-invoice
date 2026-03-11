@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { hasActiveSubscription } from "@/lib/subscription";
 import { suspendUser, unsuspendUser, removeUser } from "./actions";
 import { SuspendButton } from "./suspend-button";
 import { RemoveButton } from "./remove-button";
@@ -53,6 +54,7 @@ export default async function AdminUsersPage({
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Email</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Name</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Status</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Subscription</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Company</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Customers</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-stone-900 sm:px-6 sm:py-4">Quotes</th>
@@ -72,6 +74,20 @@ export default async function AdminUsersPage({
                     <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">Suspended</span>
                   ) : (
                     <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800">Active</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 sm:px-6 sm:py-4">
+                  {hasActiveSubscription(u.subscriptionStatus) ? (
+                    <span className="inline-flex items-center gap-1">
+                      <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800">
+                        Subscribed
+                      </span>
+                      {u.subscriptionAdminGranted && (
+                        <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Admin</span>
+                      )}
+                    </span>
+                  ) : (
+                    <span className="text-stone-400 text-xs">—</span>
                   )}
                 </td>
                 <td className="px-4 py-3 text-stone-600 sm:px-6 sm:py-4">{u.companyName ?? "—"}</td>

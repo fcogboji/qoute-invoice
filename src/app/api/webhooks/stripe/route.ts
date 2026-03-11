@@ -31,6 +31,7 @@ async function upsertSubscription(
       stripeCustomerId,
       stripeSubscriptionId: subscription.id,
       subscriptionStatus: status,
+      subscriptionAdminGranted: false,
       ...(currentPeriodEnd && { subscriptionCurrentPeriodEnd: currentPeriodEnd }),
     },
   });
@@ -43,6 +44,7 @@ async function clearSubscription(clerkId: string) {
       stripeSubscriptionId: null,
       subscriptionStatus: "canceled",
       subscriptionCurrentPeriodEnd: null,
+      subscriptionAdminGranted: null,
     },
   });
 }
