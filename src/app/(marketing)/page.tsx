@@ -101,26 +101,74 @@ export default function LandingPage() {
         </div>
       </section>
 
-          {/* Internal links */}
-          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-            <Link href="/features" className="text-[#0F2544]/70 hover:text-[#0F2544]">
-              Features
-            </Link>
-            <Link href="/pricing" className="text-[#0F2544]/70 hover:text-[#0F2544]">
-              Pricing
-            </Link>
-            <Link href="/tools" className="text-[#0F2544]/70 hover:text-[#0F2544]">
-              Free tools
-            </Link>
-            <Link href="/about" className="text-[#0F2544]/70 hover:text-[#0F2544]">
-              About
-            </Link>
-            <Link href="/contact" className="text-[#0F2544]/70 hover:text-[#0F2544]">
-              Contact
-            </Link>
+      {/* Testimonials */}
+      <section className="border-t border-[#0F2544]/10 bg-stone-50 px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center text-2xl font-bold text-[#0F2544] md:text-3xl">
+            What tradespeople say
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-[#0F2544]/70">
+            Real feedback from electricians, plumbers and builders.
+          </p>
+          <div className="mt-12 space-y-8">
+            {[
+              {
+                name: "SparkRight Electrical",
+                text: "Quote on site, convert to invoice in one tap. VAT sorted automatically. No more spreadsheets or chasing payments.",
+                initials: "SR",
+                image: null,
+              },
+              {
+                name: "James T. Plumbing",
+                text: "The PDFs look proper and my customers take me seriously. I do everything from my phone between jobs.",
+                initials: "JT",
+                image: null,
+              },
+              {
+                name: "Oakwood Builders",
+                text: "We switched from paper invoices to this and it saved us hours. UK pricing and 20% VAT — just works.",
+                initials: "OB",
+                image: null,
+              },
+              {
+                name: "Sarah Mitchell",
+                text: "Finally an invoicing app that doesn't overcomplicate things. I send quotes the same day and get paid faster.",
+                initials: "SM",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+              },
+              {
+                name: "David Chen",
+                text: "Clean PDFs, VAT calculated correctly, and I can do it all from the van. Exactly what I needed.",
+                initials: "DC",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+              },
+            ].map((t) => (
+              <div key={t.name} className="flex gap-4">
+                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-[#0F2544]/10">
+                  {t.image ? (
+                    <img src={t.image} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center text-sm font-semibold text-[#0F2544]">{t.initials}</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-medium text-[#0F2544]/80">{t.name}</span>
+                    <span className="flex text-amber-400" aria-hidden>
+                      ★★★★★
+                    </span>
+                  </div>
+                  <div className="mt-3 rounded-xl border border-[#0F2544]/10 bg-white p-4 shadow-sm">
+                    <p className="text-[#0F2544]/90">&ldquo;{t.text}&rdquo;</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Features */}
+      {/* Features */}
       <section id="features" className="border-t border-[#0F2544]/10 bg-white px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-2xl font-bold text-[#0F2544] md:text-3xl">

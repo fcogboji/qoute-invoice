@@ -99,10 +99,10 @@ function FullLogo({ className = "" }: { className?: string }) {
       <text x="130" y="95" fontFamily="Georgia, 'Times New Roman', serif" fontSize="52" fontWeight="700" letterSpacing="3" fill="#fff">
         TRADE
       </text>
-      <text x="130" y="132" fontFamily="Georgia, 'Times New Roman', serif" fontSize="38" fontWeight="500" letterSpacing="10" fill="url(#textGrad)">
+      <rect x="130" y="100" width="310" height="2" rx="1" fill="url(#accentGrad)" opacity="0.5" />
+      <text x="130" y="130" fontFamily="Georgia, 'Times New Roman', serif" fontSize="28" fontWeight="400" letterSpacing="10" fill="url(#textGrad)">
         INVOICE
       </text>
-      <rect x="130" y="100" width="310" height="2" rx="1" fill="url(#accentGrad)" opacity="0.5" />
       <text x="132" y="150" fontFamily="'Courier New', monospace" fontSize="11" letterSpacing="2" fill="#fff" opacity="0.35">
         QUOTES · INVOICES · BUSINESS
       </text>
@@ -131,17 +131,9 @@ function CompactLogo({ className = "" }: { className?: string }) {
         </svg>
       </span>
       {/* Wordmark */}
-      <span className="flex flex-col leading-tight">
+      <span className="flex items-baseline gap-1.5 leading-none">
         <span className="font-serif text-xl font-bold tracking-tight text-[#0F2544] sm:text-2xl">trade</span>
-        <span
-          className="text-base font-medium tracking-widest sm:text-lg"
-          style={{
-            background: `linear-gradient(90deg, ${gradientColors.teal}, ${gradientColors.blue})`,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
+        <span className="text-base font-semibold tracking-widest text-[#00A3FF] sm:text-lg">
           invoice
         </span>
       </span>
