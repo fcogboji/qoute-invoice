@@ -10,7 +10,7 @@ const PRICES = {
 } as const;
 
 export default function PricingContent() {
-  const [interval, setInterval] = useState<"monthly" | "yearly">("monthly");
+  const [interval, setInterval] = useState<"monthly" | "yearly">("yearly");
 
   return (
     <div className="text-stone-900">
@@ -68,10 +68,10 @@ export default function PricingContent() {
                 </>
               ) : (
                 <>
-                  <span className="text-4xl font-bold">£{PRICES.starter.yearly}</span>
-                  <span className="text-stone-500">/year</span>
+                  <span className="text-4xl font-bold">£{(PRICES.starter.yearly / 12).toFixed(2)}</span>
+                  <span className="text-stone-500">/month</span>
                   <span className="text-sm text-stone-500">
-                    £{(PRICES.starter.yearly / 12).toFixed(2)}/month billed yearly
+                    £{PRICES.starter.yearly}/year billed annually
                   </span>
                 </>
               )}
@@ -117,10 +117,10 @@ export default function PricingContent() {
                 </>
               ) : (
                 <>
-                  <span className="text-4xl font-bold">£{PRICES.pro.yearly}</span>
-                  <span className="text-stone-500">/year</span>
+                  <span className="text-4xl font-bold">£{(PRICES.pro.yearly / 12).toFixed(2)}</span>
+                  <span className="text-stone-500">/month</span>
                   <span className="text-sm text-stone-500">
-                    £{(PRICES.pro.yearly / 12).toFixed(2)}/month billed yearly
+                    £{PRICES.pro.yearly}/year billed annually
                   </span>
                 </>
               )}

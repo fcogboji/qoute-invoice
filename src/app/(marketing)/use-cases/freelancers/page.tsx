@@ -26,7 +26,7 @@ export default function FreelancersPage() {
 
       <div className="mt-10">
         <Link
-          href="/pricing"
+          href="/sign-up?redirect_url=%2Fpricing"
           className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#0F2544] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#1A3A6E]"
         >
           Start free trial

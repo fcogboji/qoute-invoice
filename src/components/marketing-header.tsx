@@ -64,7 +64,7 @@ export default function MarketingHeader() {
               </button>
             </SignInButton>
             <Link
-              href="/pricing"
+              href="/sign-up?redirect_url=%2Fpricing"
               className="flex min-h-[44px] items-center rounded-lg bg-[#0F2544] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#1A3A6E]"
             >
               Get Started
@@ -122,7 +122,7 @@ export default function MarketingHeader() {
                 </button>
               </SignInButton>
               <Link
-                href="/pricing"
+                href="/sign-up?redirect_url=%2Fpricing"
                 className="flex min-h-[44px] items-center rounded-lg bg-[#0F2544] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#1A3A6E]"
                 onClick={() => setOpen(false)}
               >

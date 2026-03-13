@@ -81,7 +81,7 @@ export default function VATCalculatorPage() {
 
       <div className="mt-8">
         <Link
-          href="/pricing"
+          href="/sign-up?redirect_url=%2Fpricing"
           className="text-sm font-medium text-[#0F2544]/70 hover:text-[#0F2544]"
         >
           Create quotes and invoices with VAT →
