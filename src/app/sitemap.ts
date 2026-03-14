@@ -4,43 +4,47 @@ import { seoKeywords } from "@/lib/seoKeywords";
 const BASE = "https://tradeinvoice.co.uk";
 
 export default async function sitemap() {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-  });
-  const blogPages = posts.map((p) => ({
-    url: `${BASE}/blog/${p.slug}`,
-    lastModified: p.updatedAt,
-  }));
+  let blogPages: { url: string; lastModified: Date }[] = [];
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+    });
+    blogPages = posts.map((p) => ({
+      url: `${BASE}/blog/${p.slug}`,
+      lastModified: p.updatedAt,
+    }));
+  } catch {
+    // If DB is unreachable, sitemap still returns static URLs
+  }
+
   const seoPages = seoKeywords.map((keyword) => ({
     url: `${BASE}/seo/${keyword.replace(/\s+/g, "-").toLowerCase()}`,
-    lastModified: new Date(),
   }));
 
-  return [
-    { url: BASE, lastModified: new Date() },
-    { url: `${BASE}/about`, lastModified: new Date() },
-    { url: `${BASE}/pricing`, lastModified: new Date() },
-    { url: `${BASE}/contact`, lastModified: new Date() },
-    { url: `${BASE}/features`, lastModified: new Date() },
-    { url: `${BASE}/sign-in`, lastModified: new Date() },
-    { url: `${BASE}/privacy`, lastModified: new Date() },
-    { url: `${BASE}/terms`, lastModified: new Date() },
-    { url: `${BASE}/cookies`, lastModified: new Date() },
-    { url: `${BASE}/tools`, lastModified: new Date() },
-    { url: `${BASE}/tools/invoice-generator`, lastModified: new Date() },
-    { url: `${BASE}/tools/vat-calculator`, lastModified: new Date() },
-    { url: `${BASE}/features/invoice-generator`, lastModified: new Date() },
-    { url: `${BASE}/features/recurring-invoices`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/electricians`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/plumbers`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/carpenters`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/fitters`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/freelancers`, lastModified: new Date() },
-    { url: `${BASE}/use-cases/small-business`, lastModified: new Date() },
-    { url: `${BASE}/guides/how-to-create-an-invoice`, lastModified: new Date() },
-    { url: `${BASE}/blog`, lastModified: new Date() },
-    ...blogPages,
-    ...seoPages,
+  const staticPages = [
+    { url: BASE },
+    { url: `${BASE}/about` },
+    { url: `${BASE}/pricing` },
+    { url: `${BASE}/contact` },
+    { url: `${BASE}/features` },
+    { url: `${BASE}/privacy` },
+    { url: `${BASE}/terms` },
+    { url: `${BASE}/cookies` },
+    { url: `${BASE}/tools` },
+    { url: `${BASE}/tools/invoice-generator` },
+    { url: `${BASE}/tools/vat-calculator` },
+    { url: `${BASE}/features/invoice-generator` },
+    { url: `${BASE}/features/recurring-invoices` },
+    { url: `${BASE}/use-cases/electricians` },
+    { url: `${BASE}/use-cases/plumbers` },
+    { url: `${BASE}/use-cases/carpenters` },
+    { url: `${BASE}/use-cases/fitters` },
+    { url: `${BASE}/use-cases/freelancers` },
+    { url: `${BASE}/use-cases/small-business` },
+    { url: `${BASE}/guides/how-to-create-an-invoice` },
+    { url: `${BASE}/blog` },
   ];
+
+  return [...staticPages, ...blogPages, ...seoPages];
 }
