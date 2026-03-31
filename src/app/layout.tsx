@@ -4,7 +4,7 @@ import "./globals.css";
 import CookieBanner from "@/components/cookie-banner";
 import StructuredData from "@/components/structured-data";
 import OrganizationSchema from "@/components/organization-schema";
-
+<script src="https://24-7concept-h4ndvvj7k-friday-s-projects.vercel.app//widget.js" async data-bot-id="cmnf137010003tbdbbl03inso" data-brand="tradeinvoice"></script>
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
