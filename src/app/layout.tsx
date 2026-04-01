@@ -4,7 +4,7 @@ import "./globals.css";
 import CookieBanner from "@/components/cookie-banner";
 import StructuredData from "@/components/structured-data";
 import OrganizationSchema from "@/components/organization-schema";
-<script src="https://24-7concept-h4ndvvj7k-friday-s-projects.vercel.app//widget.js" async data-bot-id="cmnf137010003tbdbbl03inso" data-brand="tradeinvoice"></script>
+import Script from "next/script";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     google: "10hbxiokmLm8SHIbF",
   },
 };
-
+const WIDGET_ORIGIN = process.env.NEXT_PUBLIC_APP_URL ?? "https://24-7concept.vercel.app/";
 export default function RootLayout({
   children,
 }: Readonly<{
