@@ -69,7 +69,8 @@ export default function RootLayout({
           <OrganizationSchema />
           {children}
           <CookieBanner />
-          <script src="https://24-7concept-h4ndvvj7k-friday-s-projects.vercel.app//widget.js" async data-bot-id="cmnf137010003tbdbbl03inso" data-brand="tradeinvoice"></script>
+          
+          <script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/widget.js" async data-bot-id="cmngdhndw0003esh0oi623ifx" data-brand="tradeinvoice"></script>
         </body>
       </html>
     </ClerkProvider>
