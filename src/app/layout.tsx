@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     google: "10hbxiokmLm8SHIbF",
   },
 };
-const WIDGET_ORIGIN = process.env.NEXT_PUBLIC_APP_URL ?? "https://24-7concept.vercel.app/";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -68,9 +68,10 @@ export default function RootLayout({
           <StructuredData />
           <OrganizationSchema />
           {children}
+          <Script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/api/embed" async data-bot-id="cmngdzykt0001l7jx7n7g9zyf" data-brand="tradeinvoice.co.uk" />
           <CookieBanner />
           
-       <script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/api/embed" async data-bot-id="cmngdzykt0001l7jx7n7g9zyf" data-brand="tradeinvoice.co.uk"></script>
+       
         </body>
       </html>
     </ClerkProvider>
