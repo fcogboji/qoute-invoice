@@ -4,7 +4,6 @@ import "./globals.css";
 import CookieBanner from "@/components/cookie-banner";
 import StructuredData from "@/components/structured-data";
 import OrganizationSchema from "@/components/organization-schema";
-import Script from "next/script";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -68,7 +67,6 @@ export default function RootLayout({
           <StructuredData />
           <OrganizationSchema />
           {children}
-          <script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/widget.js" defer data-api-base="https://24-7concept-pew4inhis-friday-s-projects.vercel.app" data-bot-id="cmnj5dx73000320k23wzzbdj8" data-brand="tradeinvoice"></script>
           <CookieBanner />
           
        
