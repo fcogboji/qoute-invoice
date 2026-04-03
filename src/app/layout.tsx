@@ -68,7 +68,7 @@ export default function RootLayout({
           <StructuredData />
           <OrganizationSchema />
           {children}
-          <Script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/api/embed" async data-bot-id="cmngdzykt0001l7jx7n7g9zyf" data-brand="tradeinvoice.co.uk" />
+          <script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/widget.js" defer data-api-base="https://24-7concept-pew4inhis-friday-s-projects.vercel.app" data-bot-id="cmnj5dx73000320k23wzzbdj8" data-brand="tradeinvoice"></script>
           <CookieBanner />
           
        

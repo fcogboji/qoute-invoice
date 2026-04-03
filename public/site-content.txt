@@ -1,0 +1,26 @@
+TradeInvoice — UK quotes and invoices for tradespeople
+
+What is TradeInvoice?
+TradeInvoice is online software for UK tradespeople who need to send quotes and invoices without spreadsheets or heavy accounting tools. Create customers, build quotes with line items for labour, materials and parts, and the app calculates subtotals and 20% VAT. Convert accepted quotes to invoices in one step and export professional PDFs.
+
+Who is it for?
+Electricians, plumbers, carpenters, kitchen fitters, landscapers, handymen, builders, freelancers and small UK businesses who invoice in pounds sterling.
+
+Pricing and trial
+We offer a 7-day free trial with full access. After the trial, choose a Starter or Pro plan on monthly or yearly billing (yearly saves 20%). Prices are in GBP on the pricing page. Cancel according to our terms.
+
+Features
+- Quotes with line items, discounts and UK VAT
+- Convert quotes to invoices
+- Customer records
+- PDF export; logo on documents on Pro
+- Dashboard and reports
+- Works in the browser on phone and desktop
+
+Support
+Contact us via the Contact page on tradeinvoice.co.uk.
+
+Legal
+Terms, privacy and cookies are linked in the website footer.
+
+This file is plain text for crawlers and training tools that read static content without JavaScript.
