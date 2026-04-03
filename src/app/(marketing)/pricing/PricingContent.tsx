@@ -24,6 +24,9 @@ export default function PricingContent() {
         <p className="mx-auto mt-4 max-w-lg text-center text-stone-600">
           7-day free trial. No charge until the trial ends. Cancel anytime.
         </p>
+        <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-stone-600">
+          TradeInvoice offers two paid plans for UK tradespeople: Starter and Pro. You choose monthly or yearly billing; yearly billing saves 20% compared to paying month by month. The trial gives you full access to the product so you can create quotes, invoices and customers before you are charged. After the trial, your card is billed according to the plan and interval you selected. All prices are in pounds sterling. Starter includes a generous monthly allowance for quotes and invoices; Pro includes unlimited quotes and invoices plus your logo on PDFs. You can change plans or cancel in line with our terms.
+        </p>
 
         {/* Billing toggle */}
         <div className="mt-8 flex items-center justify-center gap-4">

@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Features",
   description:
-    "TradeInvoice features: quote creation, invoice conversion, PDF export, UK VAT handling. Built for tradespeople.",
+    "TradeInvoice features: quotes, invoices, UK VAT, PDF export, customers and recurring billing. Full overview for UK tradespeople.",
 };
 
 const features = [
@@ -37,6 +37,9 @@ export default function FeaturesPage() {
       <p className="mt-4 text-lg text-[#0F2544]/70">
         Everything you need to quote, invoice and get paid. Built for UK
         tradespeople.
+      </p>
+      <p className="mt-4 text-[#0F2544]/70">
+        Below is an overview of what the product includes. Quotes let you itemise labour, materials and discounts; invoices carry the same structure once the job is approved. PDF export means you can attach documents to email or WhatsApp. Customer records reduce typing errors when you repeat work for the same client. Recurring invoices suit retainers and regular maintenance. All of this is available once you sign up and subscribe after your free trial.
       </p>
       <div className="mt-12 grid gap-6 sm:grid-cols-2">
         {features.map((f) => (

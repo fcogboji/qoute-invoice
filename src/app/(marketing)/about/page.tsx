@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About TradeInvoice",
   description:
-    "Learn more about TradeInvoice and how we help UK tradespeople manage quotes and invoices easily.",
+    "TradeInvoice helps UK tradespeople create quotes and invoices online. Learn our mission, who we serve, and how we keep pricing simple.",
 };
 
 export default function AboutPage() {
@@ -22,6 +22,18 @@ export default function AboutPage() {
         We focus on simplicity: quote on site, convert to invoice in one tap,
         export PDF and get paid. UK VAT (20%) handled automatically. No
         spreadsheets. Works on your phone.
+      </p>
+      <h2 className="mt-10 text-xl font-semibold text-[#0F2544]">Our mission</h2>
+      <p className="mt-3 text-[#0F2544]/70">
+        Small trade businesses lose time to paperwork and chasing payments. TradeInvoice exists to give you a single place for customers, quotes and invoices so you spend less time on admin and more time on paid work. We prioritise clear screens, fast loading on mobile networks, and documents that look professional when you send them to homeowners or commercial clients.
+      </p>
+      <h2 className="mt-8 text-xl font-semibold text-[#0F2544]">Built for the UK</h2>
+      <p className="mt-3 text-[#0F2544]/70">
+        Pricing, VAT defaults and language are aimed at UK sole traders and limited companies working in pounds. Subscription billing is handled securely; you choose a plan after your trial from our pricing page. We do not replace your accountant for tax or statutory accounts, but we help you issue consistent, legible invoices and quotes that support your cash flow.
+      </p>
+      <h2 className="mt-8 text-xl font-semibold text-[#0F2544]">What you can do</h2>
+      <p className="mt-3 text-[#0F2544]/70">
+        Store customer details, create quotes with multiple line items, mark quotes as accepted, convert them to invoices, mark invoices as paid, and export PDFs. You can brand documents with your logo and colour where your plan allows. Reports help you see revenue at a glance from the dashboard.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
         <Link

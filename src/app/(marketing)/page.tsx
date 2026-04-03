@@ -67,6 +67,22 @@ export default function LandingPage() {
           <span>No spreadsheets</span>
         </div>
 
+        {/* Substantive intro for visitors and AI / search crawlers */}
+        <div className="mx-auto mt-16 max-w-3xl text-left sm:mt-20">
+          <h2 className="text-xl font-bold text-[#0F2544] md:text-2xl">
+            What is TradeInvoice?
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-[#0F2544]/80">
+            TradeInvoice is online software for UK tradespeople who need to send quotes and invoices without wrestling with spreadsheets or generic accounting tools. You create a customer once, build quotes with line items for labour, materials and parts, and the app calculates subtotals and 20% VAT in line with standard UK practice. When a job is agreed, you convert the quote to an invoice in one step and export a professional PDF to email or message to your client.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-[#0F2544]/80">
+            The service is built for sole traders and small teams: electricians, plumbers, carpenters, kitchen fitters, landscapers, handymen and freelancers who invoice in pounds. You can use it on a phone on site or on a laptop in the office. Pricing is shown clearly on our pricing page: we offer a 7-day free trial so you can try the full workflow before you pay. After the trial you choose a monthly or yearly plan. There is no long-term contract; you can cancel according to our terms.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-[#0F2544]/80">
+            TradeInvoice is not a replacement for your accountant for tax filings, but it helps you look professional, stay organised and get paid faster with clear documents your customers understand. If you need help, you can reach us via the contact page on this website.
+          </p>
+        </div>
+
         {/* Mock document */}
         <div className="mx-auto mt-12 max-w-md rounded-2xl border border-[#0F2544]/10 bg-white p-4 shadow-xl sm:mt-20 sm:p-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-[#0F2544]/50">
@@ -201,6 +217,56 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ — visible text for users and crawlers */}
+      <section className="border-t border-[#0F2544]/10 bg-[#0F2544]/[0.02] px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center text-2xl font-bold text-[#0F2544] md:text-3xl">
+            Frequently asked questions
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-[#0F2544]/70">
+            Straight answers about quotes, invoices, trials and who TradeInvoice is for.
+          </p>
+          <dl className="mt-10 space-y-8">
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">What is TradeInvoice?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                TradeInvoice is an online invoicing platform for UK tradespeople. You create and manage quotes and invoices in one place, store customers, and export PDFs. It is designed for electricians, plumbers, builders, fitters and similar trades who want simple tools without complex accounting software.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">Can I create invoices and quotes online?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                Yes. You build quotes with line items, apply UK VAT where needed, then convert an accepted quote to an invoice. You can download or share PDFs and track which invoices are paid. Everything runs in the browser on desktop or mobile.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">Is TradeInvoice free?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                We offer a 7-day free trial with full access so you can test the workflow. After the trial, paid plans are available on monthly or yearly billing. See the pricing page for current UK prices in pounds and what each plan includes.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">Does it handle UK VAT?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                Yes. Standard 20% VAT can be calculated on your quotes and invoices. You can tailor line items and totals for each job. Figures are shown in pounds sterling with formats suited to UK invoices.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">Who is TradeInvoice for?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                Sole traders and small businesses in the UK who issue quotes and invoices to domestic or business clients: trades, contractors, freelancers and anyone who outgrew paper or Excel. If you work on site and need speed, it is built for you.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-lg font-semibold text-[#0F2544]">How do I get support?</dt>
+              <dd className="mt-2 text-[#0F2544]/80">
+                Use the contact page on this website to send a message. We aim to help UK-based customers with account and product questions. For billing, payment methods are managed securely through our payment provider when you subscribe.
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 
